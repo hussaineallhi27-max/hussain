@@ -22,6 +22,28 @@
       .subtle-float {
         animation: subtle-float 4s ease-in-out infinite;
       }
+      
+      /* --- Transitions & Animations --- */
+      button, input, select, textarea, .transition-all {
+          transition: all 0.2s ease-in-out;
+      }
+      
+      @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fade-in {
+          animation: fadeIn 0.5s ease-out forwards;
+      }
+
+      @keyframes modal-pop-in {
+          from { opacity: 0; transform: scale(0.95); }
+          to { opacity: 1; transform: scale(1); }
+      }
+      .modal-content-wrapper {
+          animation: modal-pop-in 0.3s ease-out forwards;
+      }
+
       .hidden-view {
         display: none;
       }
@@ -33,7 +55,7 @@
       .light-theme .bg-gray-900 { background-color: #f9fafb; }
       .light-theme .bg-gray-800\/50 { background-color: rgba(255, 255, 255, 0.8); }
       .light-theme .bg-gray-800 { background-color: #f3f4f6; }
-      .light-theme .bg-gray-900\/70 { background-color: #f3f4f6; }
+      .light-theme .bg-gray-900\/70 { background-color: rgba(243, 244, 246, 0.9); }
       .light-theme .bg-gray-700 { background-color: #e5e7eb; }
       .light-theme .hover\:bg-gray-600:hover { background-color: #d1d5db; }
       .light-theme .text-white { color: #1f2937; }
@@ -45,7 +67,6 @@
       .light-theme .text-sky-400 { color: #0369a1; }
       .light-theme .hover\:text-sky-300:hover { color: #0ea5e9; }
       .light-theme .text-sky-300 { color: #0284c7; }
-      .light-theme .text-glow { animation: none; text-shadow: none; }
       .light-theme .shadow-sky-500\/10 { box-shadow: 0 4px 6px -1px rgb(56 189 248 / 0.1), 0 2px 4px -2px rgb(56 189 248 / 0.1); }
       .light-theme .backdrop-blur-sm { backdrop-filter: blur(4px); }
       .light-theme .divide-gray-700 > :not([hidden]) ~ :not([hidden]) { border-color: #d1d5db; }
@@ -62,6 +83,28 @@
       .light-theme .border-sky-500 { border-color: #0ea5e9; }
       .light-theme .bg-sky-600 { background-color: #0284c7; }
       .light-theme .hover\:bg-sky-500:hover { background-color: #0ea5e9; }
+      .light-theme .bg-red-500\/50 { background-color: rgba(239, 68, 68, 0.2); }
+      .light-theme .hover\:bg-red-500\/50:hover { background-color: rgba(239, 68, 68, 0.4); }
+      .light-theme .border-red-500 { border-color: #ef4444; }
+      .light-theme .bg-green-500\/20 { background-color: rgba(34, 197, 94, 0.1); }
+      .light-theme .hover\:bg-green-500\/40:hover { background-color: rgba(34, 197, 94, 0.2); }
+      .light-theme .text-green-400 { color: #16a34a; }
+      .light-theme .bg-red-500\/20 { background-color: rgba(239, 68, 68, 0.1); }
+      .light-theme .hover\:bg-red-500\/40:hover { background-color: rgba(239, 68, 68, 0.2); }
+      .light-theme .text-red-400 { color: #dc2626; }
+      .light-theme .text-green-800 { color: #166534; }
+      .light-theme .bg-green-200 { background-color: #bbf7d0; }
+      .light-theme .text-yellow-800 { color: #854d0e; }
+      .light-theme .bg-yellow-200 { background-color: #fef08a; }
+      .light-theme .text-red-800 { color: #991b1b; }
+      .light-theme .bg-red-200 { background-color: #fecaca; }
+      .light-theme .text-gray-800 { color: #1f2937; }
+      .light-theme .bg-gray-300 { background-color: #d1d5db; }
+      .light-theme .peer:checked ~ .peer-checked\:bg-sky-600 { background-color: #0284c7; }
+      .light-theme .text-violet-500 { color: #7c3aed; }
+      .light-theme .bg-violet-500 { background-color: #8b5cf6; }
+      .light-theme .text-teal-500 { color: #0d9488; }
+      .light-theme .bg-teal-500 { background-color: #14b8a6; }
     </style>
 </head>
 <body class="bg-gray-900 text-white">
@@ -80,7 +123,7 @@
         <!-- AUTH SCREEN -->
         <div id="auth-screen" class="hidden-view">
             <div class="flex items-center justify-center min-h-screen bg-gray-900 p-4">
-                <div class="w-full max-w-md p-8 space-y-8 bg-gray-800/50 border border-gray-700 rounded-2xl shadow-2xl shadow-sky-500/10 backdrop-blur-sm">
+                <div class="w-full max-w-md p-8 space-y-8 bg-gray-800/50 border border-gray-700 rounded-2xl shadow-2xl shadow-sky-500/10 backdrop-blur-sm animate-fade-in">
                     <div class="text-center">
                         <svg class="w-20 h-20 mx-auto text-sky-400" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="90" stroke="currentColor" strokeWidth="10" /><path d="M50 125 C 70 100, 80 75, 100 75 S 130 100, 150 125" stroke="currentColor" strokeWidth="8" strokeLinecap="round" /><path d="M70 150 C 85 130, 115 130, 130 150" stroke="currentColor" strokeWidth="8" strokeLinecap="round" /><path d="M90 170 C 95 160, 105 160, 110 170" stroke="currentColor" strokeWidth="8" strokeLinecap="round" /></svg>
                         <h2 class="mt-6 text-3xl font-bold text-white text-glow">ASE Portal</h2>
@@ -89,93 +132,18 @@
                     <form class="mt-8 space-y-6" id="login-form">
                         <p id="login-error" class="text-red-400 text-center text-sm"></p>
                         <div>
-                            <label for="email" class="sr-only">Email</label>
-                            <input id="email" name="email" type="text" required class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Email or Username (e.g., admin or john@example.com)" />
+                            <label for="email" class="sr-only">Username or Email</label>
+                            <input id="email" name="email" type="text" required class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Username or Email" />
                         </div>
                         <div>
                             <label for="password" class="sr-only">Password</label>
-                            <input id="password" name="password" type="password" required class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Password (e.g., admin or password123)" />
-                        </div>
-                        <div class="flex items-center justify-between text-sm">
-                            <button type="button" id="nav-to-reset" class="font-medium text-sky-400 hover:text-sky-300">Forgot your password?</button>
-                            <button type="button" id="nav-to-signup" class="font-medium text-sky-400 hover:text-sky-300">Don't have an account? Sign Up</button>
+                            <input id="password" name="password" type="password" required class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Password" />
                         </div>
                         <div>
                             <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-sky-600 hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 focus:ring-offset-gray-800 transition-colors">Sign in</button>
                         </div>
                     </form>
-                    <div class="relative">
-                        <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-600"></div></div>
-                        <div class="relative flex justify-center text-sm"><span class="px-2 bg-gray-800 text-gray-400">Or continue with</span></div>
-                    </div>
-                    <div>
-                        <button id="google-login-btn" class="w-full flex items-center justify-center py-3 px-4 border border-gray-600 rounded-lg shadow-sm text-sm font-medium text-white bg-gray-700 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 focus:ring-offset-gray-800 transition-colors">
-                            <svg class="w-5 h-5" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12s5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24s8.955,20,20,20s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571l6.19,5.238C42.022,35.253,44,30.027,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path></svg>
-                            <span class="ml-3">Sign in with Google</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- SIGNUP SCREEN -->
-        <div id="signup-screen" class="hidden-view">
-             <div class="flex items-center justify-center min-h-screen bg-gray-900 p-4">
-                <div class="w-full max-w-md p-8 space-y-8 bg-gray-800/50 border border-gray-700 rounded-2xl shadow-2xl shadow-sky-500/10 backdrop-blur-sm">
-                    <div class="text-center">
-                         <svg class="w-20 h-20 mx-auto text-sky-400" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="90" stroke="currentColor" strokeWidth="10" /><path d="M50 125 C 70 100, 80 75, 100 75 S 130 100, 150 125" stroke="currentColor" strokeWidth="8" strokeLinecap="round" /><path d="M70 150 C 85 130, 115 130, 130 150" stroke="currentColor" strokeWidth="8" strokeLinecap="round" /><path d="M90 170 C 95 160, 105 160, 110 170" stroke="currentColor" strokeWidth="8" strokeLinecap="round" /></svg>
-                        <h2 class="mt-6 text-3xl font-bold text-white text-glow">Create Account</h2>
-                        <p class="mt-2 text-gray-400">Join the ASE Portal</p>
-                    </div>
-                    <form class="mt-8 space-y-6" id="signup-form">
-                        <p id="signup-error" class="text-red-400 text-center text-sm"></p>
-                        <div>
-                            <label for="signup-name" class="sr-only">Full Name</label>
-                            <input id="signup-name" type="text" required class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Full Name" />
-                        </div>
-                        <div>
-                            <label for="signup-email" class="sr-only">Email</label>
-                            <input id="signup-email" type="email" required class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Email address" />
-                        </div>
-                        <div>
-                            <label for="signup-password" class="sr-only">Password</label>
-                            <input id="signup-password" type="password" required class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Password" />
-                        </div>
-                        <div>
-                            <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-sky-600 hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 focus:ring-offset-gray-800 transition-colors">Sign up</button>
-                        </div>
-                    </form>
-                    <div class="text-sm text-center">
-                        <button id="nav-to-login-from-signup" class="font-medium text-sky-400 hover:text-sky-300">Already have an account? Sign in</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- RESET PASSWORD SCREEN -->
-        <div id="reset-password-screen" class="hidden-view">
-            <div class="flex items-center justify-center min-h-screen bg-gray-900 p-4">
-                <div class="w-full max-w-md p-8 space-y-8 bg-gray-800/50 border border-gray-700 rounded-2xl shadow-2xl shadow-sky-500/10 backdrop-blur-sm">
-                    <div class="text-center">
-                        <svg class="w-20 h-20 mx-auto text-sky-400" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="90" stroke="currentColor" strokeWidth="10" /><path d="M50 125 C 70 100, 80 75, 100 75 S 130 100, 150 125" stroke="currentColor" strokeWidth="8" strokeLinecap="round" /><path d="M70 150 C 85 130, 115 130, 130 150" stroke="currentColor" strokeWidth="8" strokeLinecap="round" /><path d="M90 170 C 95 160, 105 160, 110 170" stroke="currentColor" strokeWidth="8" strokeLinecap="round" /></svg>
-                        <h2 class="mt-6 text-3xl font-bold text-white text-glow">Reset Password</h2>
-                        <p class="mt-2 text-gray-400">Enter your email to reset your password</p>
-                    </div>
-                    <form class="mt-8 space-y-6" id="reset-password-form">
-                        <p id="reset-message" class="text-green-400 text-center text-sm"></p>
-                        <div id="reset-form-fields">
-                            <div>
-                                <label for="email-reset" class="sr-only">Email</label>
-                                <input id="email-reset" name="email" type="email" required class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Email address" />
-                            </div>
-                            <div>
-                                <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-sky-600 hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 focus:ring-offset-gray-800 transition-colors">Reset Password</button>
-                            </div>
-                        </div>
-                    </form>
-                    <div class="text-sm text-center">
-                        <button id="nav-to-login-from-reset" class="font-medium text-sky-400 hover:text-sky-300">Back to Sign in</button>
-                    </div>
+                    <p class="text-center text-xs text-gray-500 mt-8">Made & Designed by <span class="text-glow font-semibold text-sky-400">Hussain</span></p>
                 </div>
             </div>
         </div>
@@ -186,14 +154,12 @@
         <!-- ADMIN DASHBOARD -->
         <div id="admin-dashboard" class="hidden-view"></div>
 
-        <!-- PURCHASE MODAL -->
-        <div id="purchase-modal-container"></div>
+        <!-- MODAL CONTAINERS -->
+        <div id="main-modal-container"></div>
+        <div id="secondary-modal-container"></div>
 
-        <!-- NOTIFICATION MODAL (ADMIN) -->
-        <div id="notification-modal-container"></div>
-        
-        <!-- PACKAGE EDIT MODAL (ADMIN) -->
-        <div id="package-edit-modal-container"></div>
+        <!-- ADMIN OVERLAY FOR MOBILE -->
+        <div id="admin-overlay" class="fixed inset-0 bg-black/50 z-30 hidden md:hidden"></div>
     </div>
 
     <script type="module">
@@ -201,32 +167,73 @@
 
         // --- GLOBAL STATE & CONSTANTS ---
         const Role = { CUSTOMER: 'CUSTOMER', ADMIN: 'ADMIN' };
-        const PackageStatus = { INACTIVE: 'INACTIVE', PENDING: 'PENDING', ACTIVE: 'ACTIVE', EXPIRED: 'EXPIRED', REJECTED: 'REJECTED' };
+        const PackageStatus = { PENDING: 'PENDING', ACTIVE: 'ACTIVE', EXPIRED: 'EXPIRED', REJECTED: 'REJECTED' };
         const ComplaintStatus = { PENDING: 'PENDING', RESOLVED: 'RESOLVED' };
 
         let appState = 'SPLASH_SCREEN';
         let currentUser = null;
         let currentTheme = 'dark';
 
-        let users = [
-            { id: 'user1', name: 'John Doe', email: 'john@example.com', password: 'password123', role: Role.CUSTOMER, createdAt: new Date(Date.now() - 60 * 24 * 60 * 60 * 1000).toISOString() },
-            { id: 'admin', name: 'Admin', email: 'admin', password: 'admin', role: Role.ADMIN, createdAt: new Date().toISOString() },
-        ];
-        let transactions = [
-            { id: 'tx1', userId: 'user1', packageId: 'pkg1', transactionId: 'TX_REJECTED_001', status: PackageStatus.REJECTED, purchaseDate: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString() },
-            { id: 'tx2', userId: 'user1', packageId: 'pkg2', transactionId: 'TX_EXPIRED_002', status: PackageStatus.EXPIRED, purchaseDate: new Date(Date.now() - 40 * 24 * 60 * 60 * 1000).toISOString(), activationDate: new Date(Date.now() - 35 * 24 * 60 * 60 * 1000).toISOString(), expiryDate: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString() },
-        ];
-        let wifiPackages = [
-            { id: 'pkg1', name: 'Starter Pack', speed: '50 Mbps', price: 20, durationDays: 30 },
-            { id: 'pkg2', name: 'Pro Pack', speed: '200 Mbps', price: 45, durationDays: 30 },
-            { id: 'pkg3', name: 'Ultra Pack', speed: '1 Gbps', price: 80, durationDays: 30 },
-        ];
-        let adminAccount = {
-            name: "ASE Portal Admin",
-            accountNumber: "123-456-7890"
+        // --- DATA PERSISTENCE ---
+        const defaultData = {
+            users: [
+                { id: 'user1', name: 'John Doe', email: 'john@example.com', password: 'password123', role: Role.CUSTOMER, createdAt: new Date(Date.now() - 60 * 24 * 60 * 60 * 1000).toISOString(), address: '123 Tech Street, Silicon Valley', cnic: '12345-6789012-3', debitInfo: 15, consumerId: 'JD-001', profilePic: null, allTimePayment: 250 },
+                { id: 'admin', name: 'Admin', email: 'admin', password: 'admin', role: Role.ADMIN, createdAt: new Date().toISOString(), profilePic: null },
+            ],
+            transactions: [
+                { id: 'tx1', userId: 'user1', packageId: 'pkg1', transactionId: 'TX_REJECTED_001', status: PackageStatus.REJECTED, purchaseDate: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString() },
+                { id: 'tx2', userId: 'user1', packageId: 'pkg2', transactionId: 'TX_EXPIRED_002', status: PackageStatus.EXPIRED, purchaseDate: new Date(Date.now() - 40 * 24 * 60 * 60 * 1000).toISOString(), activationDate: new Date(Date.now() - 35 * 24 * 60 * 60 * 1000).toISOString(), expiryDate: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString() },
+                { id: 'tx3', userId: 'user1', packageId: 'pkg3', transactionId: 'TX_ACTIVE_003', status: PackageStatus.ACTIVE, purchaseDate: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(), activationDate: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(), expiryDate: new Date(Date.now() + 20 * 24 * 60 * 60 * 1000).toISOString() },
+            ],
+            wifiPackages: [
+                { id: 'pkg1', name: 'Starter Pack', speed: '50 Mbps', price: 20, durationDays: 30 },
+                { id: 'pkg2', name: 'Pro Pack', speed: '200 Mbps', price: 45, durationDays: 30 },
+                { id: 'pkg3', name: 'Ultra Pack', speed: '1 Gbps', price: 80, durationDays: 30 },
+            ],
+            adminAccount: {
+                name: "ASE Portal Admin",
+                accountNumber: "123-456-7890"
+            },
+            notifications: [],
+            complaints: [
+                { id: 'comp1', userId: 'user1', subject: 'Slow Speeds', message: 'My internet is very slow in the evenings.', status: ComplaintStatus.PENDING, timestamp: new Date().toISOString() }
+            ],
         };
-        let notifications = [];
-        let complaints = [];
+
+        let users, transactions, wifiPackages, adminAccount, notifications, complaints;
+
+        const saveState = () => {
+            try {
+                const stateToSave = { users, transactions, wifiPackages, adminAccount, notifications, complaints };
+                localStorage.setItem('ase_portal_data', JSON.stringify(stateToSave));
+            } catch (error) {
+                console.error("Failed to save state to localStorage", error);
+            }
+        };
+
+        const loadState = () => {
+            try {
+                const savedStateJSON = localStorage.getItem('ase_portal_data');
+                if (savedStateJSON) {
+                    const savedState = JSON.parse(savedStateJSON);
+                    users = savedState.users || defaultData.users;
+                    transactions = savedState.transactions || defaultData.transactions;
+                    wifiPackages = savedState.wifiPackages || defaultData.wifiPackages;
+                    adminAccount = savedState.adminAccount || defaultData.adminAccount;
+                    notifications = savedState.notifications || defaultData.notifications;
+                    complaints = savedState.complaints || defaultData.complaints;
+                } else {
+                    // Use structuredClone for a deep copy if available, otherwise a simple spread for this data structure is okay.
+                    ({ users, transactions, wifiPackages, adminAccount, notifications, complaints } = JSON.parse(JSON.stringify(defaultData)));
+                    saveState(); // Save the initial default state
+                }
+            } catch (error) {
+                console.error("Failed to load state from localStorage, using defaults.", error);
+                ({ users, transactions, wifiPackages, adminAccount, notifications, complaints } = JSON.parse(JSON.stringify(defaultData)));
+            }
+        };
+
+        loadState(); // Initial load of data
 
         // --- UTILS ---
         let audioContext = null;
@@ -234,16 +241,30 @@
           if (audioContext) return;
           try {
             audioContext = new (window.AudioContext || window.webkitAudioContext)();
-          } catch(e) {
-            console.error("Web Audio API not supported in this browser");
-          }
+          } catch(e) { console.error("Web Audio API not supported."); }
+        };
+
+        const generateAvatarHTML = (user, sizeClasses = 'w-10 h-10', textClasses = 'text-xl') => {
+            if (user?.profilePic) {
+                return `<img src="${user.profilePic}" alt="Profile Picture" class="${sizeClasses} rounded-full object-cover border-2 border-gray-600">`;
+            }
+            const initial = user?.name ? user.name.charAt(0).toUpperCase() : '?';
+            let hash = 0;
+            if (user?.name) {
+                for (let i = 0; i < user.name.length; i++) {
+                    hash = user.name.charCodeAt(i) + ((hash << 5) - hash);
+                    hash |= 0; // Ensure 32bit integer
+                }
+            }
+            const colors = ['bg-sky-600', 'bg-emerald-600', 'bg-amber-600', 'bg-rose-600', 'bg-indigo-600', 'bg-teal-600', 'bg-fuchsia-600', 'bg-lime-600'];
+            const color = colors[Math.abs(hash) % colors.length];
+            return `<div class="${sizeClasses} ${color} rounded-full flex items-center justify-center text-white font-bold ${textClasses} border-2 border-gray-600"><span>${initial}</span></div>`;
         };
 
         const playSound = (type) => {
           try {
             if (!audioContext || audioContext.state === 'closed') return;
             if (audioContext.state === 'suspended') { audioContext.resume(); }
-
             const context = audioContext;
             const oscillator = context.createOscillator();
             const gainNode = context.createGain();
@@ -256,6 +277,7 @@
               case 'click': oscillator.type = 'triangle'; oscillator.frequency.setValueAtTime(880, context.currentTime); break;
               case 'notification': oscillator.type = 'sine'; oscillator.frequency.setValueAtTime(600, context.currentTime); oscillator.frequency.linearRampToValueAtTime(1200, context.currentTime + 0.1); break;
               case 'error': oscillator.type = 'square'; oscillator.frequency.setValueAtTime(300, context.currentTime); oscillator.frequency.linearRampToValueAtTime(150, context.currentTime + 0.15); break;
+              case 'delete': oscillator.type = 'sawtooth'; oscillator.frequency.setValueAtTime(400, context.currentTime); oscillator.frequency.linearRampToValueAtTime(200, context.currentTime + 0.2); break;
             }
             oscillator.start(context.currentTime);
             gainNode.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + 0.2);
@@ -272,36 +294,25 @@
             doc.setFontSize(12); doc.text(user.name, 14, 67); doc.text(user.email, 14, 74);
             doc.line(14, 85, 196, 85);
             doc.setFontSize(14); doc.text("Description", 14, 95); doc.text("Price", 180, 95);
-            doc.setFontSize(12); doc.text(`${wifiPackage.name} (${wifiPackage.speed})`, 14, 105); doc.text(`$${wifiPackage.price.toFixed(2)}`, 180, 105); doc.text(`Activation: ${new Date(transaction.activationDate).toLocaleDateString()}`, 14, 112); doc.text(`Expires: ${new Date(transaction.expiryDate).toLocaleDateString()}`, 14, 119);
+            doc.setFontSize(12); doc.text(`${wifiPackage.name} (${wifiPackage.speed})`, 14, 105); doc.text(`Rs ${wifiPackage.price.toFixed(2)}`, 180, 105);
+            if(transaction.activationDate) doc.text(`Activation: ${new Date(transaction.activationDate).toLocaleDateString()}`, 14, 112);
+            if(transaction.expiryDate) doc.text(`Expires: ${new Date(transaction.expiryDate).toLocaleDateString()}`, 14, 119);
             doc.line(14, 130, 196, 130);
-            doc.setFontSize(16); doc.text("Total", 14, 140); doc.text(`$${wifiPackage.price.toFixed(2)}`, 180, 140);
+            doc.setFontSize(16); doc.text("Total", 14, 140); doc.text(`Rs ${wifiPackage.price.toFixed(2)}`, 180, 140);
             doc.setFontSize(10); doc.text("Thank you for your business!", 105, 160, { align: 'center'});
             doc.save(`invoice-${transaction.id}.pdf`);
-        };
-        
-        const exportToCsv = (data, filename) => {
-            if (data.length === 0) return;
-            const headers = Object.keys(data[0]);
-            const csvRows = [headers.join(','), ...data.map(row => headers.map(header => { const cell = row[header] === null || row[header] === undefined ? '' : String(row[header]); return `"${cell.replace(/"/g, '""')}"`; }).join(','))];
-            const blob = new Blob([csvRows.join('\n')], { type: 'text/csv' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.setAttribute('hidden', ''); a.setAttribute('href', url); a.setAttribute('download', `${filename}.csv`);
-            document.body.appendChild(a); a.click(); document.body.removeChild(a);
         };
 
         const getStatusPillHTML = (status) => {
             switch (status) {
-                case PackageStatus.ACTIVE: return `<span class="px-2 py-1 text-xs font-semibold text-green-800 bg-green-200 rounded-full inline-flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> Active</span>`;
-                case PackageStatus.PENDING: return `<span class="px-2 py-1 text-xs font-semibold text-yellow-800 bg-yellow-200 rounded-full inline-flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> Pending</span>`;
-                case ComplaintStatus.PENDING: return `<span class="px-2 py-1 text-xs font-semibold text-yellow-800 bg-yellow-200 rounded-full">Pending</span>`;
+                case PackageStatus.ACTIVE: return `<span class="px-2 py-1 text-xs font-semibold text-green-800 bg-green-200 rounded-full inline-flex items-center gap-1"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> Active</span>`;
+                case PackageStatus.PENDING: return `<span class="px-2 py-1 text-xs font-semibold text-yellow-800 bg-yellow-200 rounded-full inline-flex items-center gap-1"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> Pending</span>`;
                 case ComplaintStatus.RESOLVED: return `<span class="px-2 py-1 text-xs font-semibold text-green-800 bg-green-200 rounded-full">Resolved</span>`;
-                case PackageStatus.REJECTED: return `<span class="px-2 py-1 text-xs font-semibold text-red-800 bg-red-200 rounded-full inline-flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> Rejected</span>`;
+                case PackageStatus.REJECTED: return `<span class="px-2 py-1 text-xs font-semibold text-red-800 bg-red-200 rounded-full inline-flex items-center gap-1"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> Rejected</span>`;
                 case PackageStatus.EXPIRED: return `<span class="px-2 py-1 text-xs font-semibold text-gray-800 bg-gray-300 rounded-full">Expired</span>`;
-                default: return `<span class="px-2 py-1 text-xs font-semibold text-gray-800 bg-gray-300 rounded-full">Inactive</span>`;
+                default: return `<span class="px-2 py-1 text-xs font-semibold text-yellow-800 bg-yellow-200 rounded-full">Pending</span>`;
             }
         };
-
 
         // --- THEME ---
         function applyTheme(theme) {
@@ -310,40 +321,27 @@
             const themeIcon = `
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">${
                 theme === 'dark'
-                ? `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />` // Sun icon
-                : `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />` // Moon icon
+                ? `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />`
+                : `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />`
             }</svg>`;
-            
             document.querySelectorAll('.theme-switcher-btn').forEach(btn => {
                 btn.innerHTML = themeIcon;
                 btn.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
             });
-
-            if (theme === 'light') {
-                document.body.classList.add('light-theme');
-            } else {
-                document.body.classList.remove('light-theme');
-            }
+            document.body.classList.toggle('light-theme', theme === 'light');
         }
         
         function toggleTheme() {
             playSound('click');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            applyTheme(newTheme);
+            applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
         }
 
         // --- NAVIGATION & RENDERING ---
-        const views = ['splash-screen', 'auth-screen', 'signup-screen', 'reset-password-screen', 'customer-dashboard', 'admin-dashboard'];
+        const views = ['splash-screen', 'auth-screen', 'customer-dashboard', 'admin-dashboard'];
         function navigateTo(targetState) {
-            playSound('click');
             appState = targetState;
             views.forEach(id => {
-                const el = document.getElementById(id);
-                if (id === `${appState.toLowerCase().replace(/_/g, '-')}`) {
-                    el.classList.remove('hidden-view');
-                } else {
-                    el.classList.add('hidden-view');
-                }
+                document.getElementById(id).classList.toggle('hidden-view', id !== `${appState.toLowerCase().replace(/_/g, '-')}`);
             });
             renderCurrentView();
         }
@@ -354,18 +352,17 @@
             } else if (appState === 'ADMIN_DASHBOARD' && currentUser) {
                 renderAdminDashboard();
             }
-             // Re-apply theme to ensure dynamically created elements have correct icons
             applyTheme(currentTheme);
         }
         
         // --- HANDLERS ---
         function handleLogin(e) {
             if (e) e.preventDefault();
-            const email = document.getElementById('email').value;
+            const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
             const errorEl = document.getElementById('login-error');
             
-            const user = users.find(u => u.email.trim() === email.trim() && u.password === password);
+            const user = users.find(u => (u.email === email || u.name === email) && u.password === password);
             if (user) {
                 playSound('login');
                 currentUser = user;
@@ -376,15 +373,6 @@
                 errorEl.textContent = 'Invalid credentials. Please try again.';
             }
         }
-
-        function handleGoogleLogin() {
-            playSound('login');
-            const customer = users.find(u => u.role === Role.CUSTOMER);
-            if (customer) {
-              currentUser = customer;
-              navigateTo('CUSTOMER_DASHBOARD');
-            }
-        }
         
         function handleLogout() {
             playSound('click');
@@ -392,70 +380,34 @@
             navigateTo('AUTH_SCREEN');
         }
 
-        function handleSignup(e) {
-            e.preventDefault();
-            const name = document.getElementById('signup-name').value;
-            const email = document.getElementById('signup-email').value;
-            const password = document.getElementById('signup-password').value;
-            const errorEl = document.getElementById('signup-error');
-            errorEl.textContent = '';
-            
-            if (!name.trim() || !email.trim() || !password.trim()) {
-                playSound('error');
-                errorEl.textContent = 'All fields are required.';
-                return;
-            }
-            if (password.length < 6) {
-                playSound('error');
-                errorEl.textContent = 'Password must be at least 6 characters long.';
-                return;
-            }
-            if (users.find(u => u.email.toLowerCase() === email.toLowerCase().trim())) {
-                playSound('error');
-                errorEl.textContent = 'An account with this email already exists.';
-                return;
-            }
-            
-            const newUser = {
-                id: `user_${Date.now()}`, name, email: email.trim(), password, role: Role.CUSTOMER,
-                createdAt: new Date().toISOString(),
-            };
-            users.push(newUser);
-            playSound('login');
-            currentUser = newUser;
-            navigateTo('CUSTOMER_DASHBOARD');
-        }
-        
-        function handleResetPassword(e) {
-            e.preventDefault();
-            const email = document.getElementById('email-reset').value;
-            const messageEl = document.getElementById('reset-message');
-            const formFields = document.getElementById('reset-form-fields');
-            
-            if (email.trim()) {
-                const userExists = users.find(u => u.email.toLowerCase() === email.toLowerCase().trim());
-                if (userExists) {
-                    const newPassword = Math.random().toString(36).slice(-8);
-                    users = users.map(u => u.id === userExists.id ? {...u, password: newPassword} : u);
-                    console.log(`Password for ${email} has been reset to: ${newPassword}`);
-                } else {
-                    console.log(`Password reset attempted for non-existent email: ${email}`);
-                }
-                playSound('notification');
-                messageEl.textContent = `If an account exists for ${email}, a password reset has been initiated. (Check console for new password).`;
-                formFields.classList.add('hidden-view');
-            }
-        }
-
         function handlePurchase(packageId, transactionId) {
             if(!currentUser) return;
             const newTransaction = {
                 id: `tx_${Date.now()}`, userId: currentUser.id, packageId, transactionId, status: PackageStatus.PENDING,
-                purchaseDate: new Date().toISOString(),
+                purchaseDate: new Date().toISOString(), type: 'PACKAGE_PURCHASE'
             };
             transactions.push(newTransaction);
+            saveState();
             playSound('notification');
             renderCustomerDashboard();
+        }
+
+        function handleDebitPayment(transactionId, amount) {
+            if(!currentUser) return;
+            const newTransaction = {
+                id: `tx_${Date.now()}`,
+                userId: currentUser.id,
+                packageId: null, // No package associated
+                transactionId,
+                status: PackageStatus.PENDING,
+                purchaseDate: new Date().toISOString(),
+                type: 'DEBIT_PAYMENT', // New field
+                amount: amount, // New field
+            };
+            transactions.push(newTransaction);
+            saveState();
+            playSound('notification');
+            renderCustomerDashboard('profile'); // Go back to profile view
         }
 
         function handleApprove(transactionId) {
@@ -463,18 +415,34 @@
             let approvedTx;
             transactions = transactions.map(t => {
                 if (t.id === transactionId) {
-                    const now = new Date();
-                    const aPackage = wifiPackages.find(p => p.id === t.packageId);
-                    const duration = aPackage?.durationDays || 30;
-                    const expiry = new Date(now);
-                    expiry.setDate(expiry.getDate() + duration);
-                    const updatedTx = {...t, status: PackageStatus.ACTIVE, activationDate: now.toISOString(), expiryDate: expiry.toISOString()};
-                    approvedTx = updatedTx;
-                    return updatedTx;
+                    if (t.type === 'DEBIT_PAYMENT') {
+                        approvedTx = {...t, status: PackageStatus.ACTIVE, activationDate: new Date().toISOString() };
+                        users = users.map(u => {
+                            if (u.id === approvedTx.userId) {
+                                return { ...u, debitInfo: Math.max(0, (u.debitInfo || 0) - approvedTx.amount) };
+                            }
+                            return u;
+                        });
+                        return approvedTx;
+
+                    } else { // It's a package purchase
+                        const now = new Date();
+                        const aPackage = wifiPackages.find(p => p.id === t.packageId);
+                        const expiry = new Date(now);
+                        expiry.setDate(expiry.getDate() + (aPackage?.durationDays || 30));
+                        approvedTx = {...t, status: PackageStatus.ACTIVE, activationDate: now.toISOString(), expiryDate: expiry.toISOString()};
+                        return approvedTx;
+                    }
                 }
                 return t;
             });
-            if (approvedTx) handleSendNotification(approvedTx.userId, "Your recent purchase has been approved and your package is now active!");
+            saveState();
+            if (approvedTx) {
+                const message = approvedTx.type === 'DEBIT_PAYMENT' 
+                    ? `Your debit payment of Rs ${approvedTx.amount.toFixed(2)} has been approved.`
+                    : "Your purchase has been approved and is now active!";
+                handleSendNotification(approvedTx.userId, message);
+            }
             renderAdminDashboard('transactions');
         }
 
@@ -488,52 +456,51 @@
                 }
                 return t;
             });
-            if (rejectedTx) handleSendNotification(rejectedTx.userId, `Your purchase with Transaction ID ${rejectedTx.transactionId} has been rejected. Please check the ID and resubmit.`);
+            saveState();
+            if (rejectedTx) {
+                const message = rejectedTx.type === 'DEBIT_PAYMENT'
+                    ? `Your debit payment with Transaction ID ${rejectedTx.transactionId} has been rejected.`
+                    : `Your purchase with Transaction ID ${rejectedTx.transactionId} has been rejected.`;
+                handleSendNotification(rejectedTx.userId, message);
+            }
             renderAdminDashboard('transactions');
         }
         
         function handleSendNotification(userId, message) {
             playSound('notification');
-            const newNotif = {
+            notifications.push({
                 id: `notif_${Date.now()}`, userId, message, timestamp: new Date().toISOString(), read: false,
-            };
-            notifications.push(newNotif);
+            });
+            saveState();
             if(appState === 'CUSTOMER_DASHBOARD') renderCustomerDashboard();
-            if(appState === 'ADMIN_DASHBOARD') renderAdminDashboard('notifications');
+            if(appState === 'ADMIN_DASHBOARD') renderAdminDashboard('broadcast');
         }
         
         function handleMarkAllRead() {
             if (!currentUser) return;
             playSound('click');
-            notifications = notifications.map(n => {
-                if (n.userId === currentUser.id || n.userId === 'all') {
-                    return { ...n, read: true };
-                }
-                return n;
+            notifications.forEach(n => {
+                if (n.userId === currentUser.id || n.userId === 'all') n.read = true;
             });
+            saveState();
             renderCurrentView();
         }
 
         function handleComplaintSubmit(userId, subject, message) {
-            const newComplaint = {
+            complaints.push({
                 id: `comp_${Date.now()}`, userId, subject, message, status: ComplaintStatus.PENDING,
                 timestamp: new Date().toISOString(),
-            };
-            complaints.push(newComplaint);
+            });
+            saveState();
             playSound('notification');
             renderCustomerDashboard('support');
         }
         
         function handleResolveComplaint(complaintId) {
             complaints = complaints.map(c => c.id === complaintId ? {...c, status: ComplaintStatus.RESOLVED} : c);
+            saveState();
             playSound('notification');
             renderAdminDashboard('complaints');
-        }
-
-        function handleAssignId(userId, assignId) {
-            users = users.map(u => u.id === userId ? { ...u, assignId } : u);
-            playSound('notification');
-            handleSendNotification(userId, `Your new Assign ID is: ${assignId}`);
         }
 
         function handleUpdateCredentials(newUsername, newPass) {
@@ -550,6 +517,7 @@
                 }
                 return u;
             });
+            saveState();
             playSound('notification');
             renderAdminDashboard('settings');
         }
@@ -561,37 +529,72 @@
                 return;
             }
             adminAccount = { name, accountNumber };
+            saveState();
             playSound('notification');
             renderAdminDashboard('settings');
         }
 
-        function handleUpdatePackage(packageId, data) {
-            if (!data.name.trim() || !data.speed.trim() || !data.price || data.price <= 0) {
+        function handleUpdatePackage(packageData) {
+            if (!packageData.name.trim() || !packageData.speed.trim() || !packageData.price || packageData.price <= 0) {
                 playSound('error');
                 alert('Please provide a valid name, speed, and a price greater than zero.');
                 return;
             }
-            wifiPackages = wifiPackages.map(p => p.id === packageId ? { ...p, ...data } : p);
+            if(packageData.id) { // Editing existing package
+                wifiPackages = wifiPackages.map(p => p.id === packageData.id ? { ...p, ...packageData } : p);
+            } else { // Adding new package
+                wifiPackages.push({ ...packageData, id: `pkg_${Date.now()}`, durationDays: 30 });
+            }
+            saveState();
             playSound('notification');
             renderAdminDashboard('packages');
         }
-        
+
+        function handleAddCustomer(customerData) {
+            if (users.find(u => u.email.toLowerCase() === customerData.email.toLowerCase().trim())) {
+                playSound('error');
+                alert('An account with this email already exists.');
+                return false;
+            }
+            const newCustomer = {
+                ...customerData,
+                id: `user_${Date.now()}`,
+                role: Role.CUSTOMER,
+                createdAt: new Date().toISOString()
+            };
+            users.push(newCustomer);
+            saveState();
+            playSound('notification');
+            handleSendNotification(newCustomer.id, `Welcome to ASE Portal! Your account has been created.`);
+            renderAdminDashboard('customers');
+            return true;
+        }
+
+        function handleDeleteCustomer(userId) {
+            users = users.filter(u => u.id !== userId);
+            // Optional: also delete related transactions and complaints
+            // transactions = transactions.filter(t => t.userId !== userId);
+            // complaints = complaints.filter(c => c.userId !== userId);
+            saveState();
+            playSound('delete');
+            renderAdminDashboard('customers');
+        }
+
         // --- CUSTOMER DASHBOARD RENDERING ---
         function renderCustomerDashboard(view = 'dashboard') {
             const dashboardEl = document.getElementById('customer-dashboard');
             const freshCurrentUser = users.find(u => u.id === currentUser.id) || currentUser;
-            const userTransactions = transactions.filter(t => t.userId === freshCurrentUser.id).sort((a, b) => new Date(b.purchaseDate).getTime() - new Date(a.purchaseDate).getTime());
-            const userComplaints = complaints.filter(c => c.userId === freshCurrentUser.id).sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
-            const activeTransaction = userTransactions.find(t => t.status === PackageStatus.ACTIVE);
+            const userTransactions = transactions.filter(t => t.userId === freshCurrentUser.id).sort((a, b) => new Date(b.purchaseDate) - new Date(a.purchaseDate));
+            const activeTransaction = userTransactions.find(t => t.status === PackageStatus.ACTIVE && t.type !== 'DEBIT_PAYMENT');
             const pendingTransaction = userTransactions.find(t => t.status === PackageStatus.PENDING);
             const activePackage = activeTransaction ? wifiPackages.find(p => p.id === activeTransaction.packageId) : null;
-            const userNotifications = notifications.filter(n => n.userId === 'all' || n.userId === freshCurrentUser.id);
+            const userNotifications = notifications.filter(n => n.userId === 'all' || n.userId === freshCurrentUser.id).sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
             const hasUnread = userNotifications.some(n => !n.read);
 
             let activePackageHTML = '';
-            if(activePackage && activeTransaction) {
+            if(activePackage && activeTransaction?.expiryDate) {
                 const expiryDate = new Date(activeTransaction.expiryDate);
-                const daysLeft = Math.max(0, Math.ceil((expiryDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)));
+                const daysLeft = Math.max(0, Math.ceil((expiryDate - new Date()) / (1000 * 60 * 60 * 24)));
                 activePackageHTML = `
                 <div class="mb-10">
                     <div class="bg-sky-500/20 border border-sky-400 p-6 rounded-xl shadow-lg shadow-sky-500/20 backdrop-blur-sm">
@@ -601,10 +604,10 @@
                           <p class="text-xl font-semibold text-white">${activePackage.name}</p>
                           <p class="text-gray-300">${activePackage.speed}</p>
                         </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.636 18.364a9 9 0 010-12.728m12.728 0a9 9 0 010 12.728m-9.9-2.828a4 4 0 010-5.656m5.656 0a4 4 0 010 5.656m-2.828 2.828a1 1 0 11-1.414-1.414 1 1 0 011.414 1.414z" /></svg>
+                        <svg class="w-12 h-12 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.636 18.364a9 9 0 010-12.728m12.728 0a9 9 0 010 12.728m-9.9-2.828a4 4 0 010-5.656m5.656 0a4 4 0 010 5.656m-2.828 2.828a1 1 0 11-1.414-1.414 1 1 0 011.414 1.414z" /></svg>
                       </div>
                       <div class="mt-4 pt-4 border-t border-sky-400/50 flex items-center gap-2 ${daysLeft <= 7 ? 'text-yellow-300' : 'text-gray-200'}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                         <p class="font-medium">Expires on: ${expiryDate.toLocaleDateString()} (${daysLeft} days left)</p>
                       </div>
                     </div>
@@ -615,709 +618,887 @@
               <div class="bg-gray-800/50 border border-gray-700 p-6 rounded-lg backdrop-blur-sm transform hover:scale-105 transition-transform duration-300 hover:border-sky-500 hover:shadow-2xl hover:shadow-sky-500/20">
                 <h3 class="text-xl font-bold text-sky-400">${pkg.name}</h3>
                 <p class="text-gray-400 mt-1">${pkg.speed}</p>
-                <p class="text-4xl font-extrabold text-white my-4">$${pkg.price}<span class="text-lg font-normal text-gray-400">/month</span></p>
-                <button data-package-id="${pkg.id}" ${!!pendingTransaction ? 'disabled' : ''} class="buy-btn w-full bg-sky-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-500 transition-colors duration-300 disabled:bg-gray-600 disabled:cursor-not-allowed disabled:text-gray-400 flex items-center justify-center gap-2">
+                <p class="text-4xl font-extrabold text-white my-4">Rs ${pkg.price}<span class="text-lg font-normal text-gray-400">/month</span></p>
+                <button data-package-id="${pkg.id}" ${!!pendingTransaction ? 'disabled' : ''} class="buy-btn w-full bg-sky-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-500 transition-all disabled:bg-gray-600 disabled:cursor-not-allowed disabled:text-gray-400">
                   ${!!pendingTransaction ? 'Pending Approval' : 'Buy Now'}
                 </button>
               </div>`).join('');
-
-            const historyTableHTML = userTransactions.length > 0 ? userTransactions.map(t => {
+            
+            const historyCardsHTML = `<div class="md:hidden space-y-4">${userTransactions.map(t => {
                 const aPackage = wifiPackages.find(p => p.id === t.packageId);
-                return `<tr class="hover:bg-gray-700/50">
-                          <td class="p-4 font-medium">${aPackage?.name}</td>
-                          <td class="p-4 text-gray-300">${new Date(t.purchaseDate).toLocaleDateString()}</td>
-                          <td class="p-4">${getStatusPillHTML(t.status)}</td>
-                          <td class="p-4 text-gray-400 font-mono text-sm">${t.transactionId}</td>
-                          <td class="p-4">${t.status === PackageStatus.ACTIVE ? `<button data-tx-id="${t.id}" class="download-invoice-btn text-sky-400 hover:text-sky-300" title="Download Invoice"><svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg></button>` : ''}</td>
-                        </tr>`;
-            }).join('') : `<tr><td colspan="5" class="text-center p-8 text-gray-400">No purchase history found.</td></tr>`;
-
-            const historyCardsHTML = userTransactions.length > 0 ? userTransactions.map(t => {
-                const aPackage = wifiPackages.find(p => p.id === t.packageId);
-                return `
-                    <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-4 space-y-2">
-                        <div class="flex justify-between items-start">
-                            <span class="font-medium text-white">${aPackage?.name}</span>
-                            ${getStatusPillHTML(t.status)}
+                const description = t.type === 'DEBIT_PAYMENT' ? `Debit Payment (Rs ${t.amount.toFixed(2)})` : aPackage?.name || 'N/A';
+                return `<div class="bg-gray-800/50 border border-gray-700 rounded-lg p-4">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="font-bold text-white">${description}</p>
+                            <p class="text-sm text-gray-400">${new Date(t.purchaseDate).toLocaleDateString()}</p>
                         </div>
-                        <p class="text-sm text-gray-300">Date: ${new Date(t.purchaseDate).toLocaleDateString()}</p>
-                        <p class="text-sm text-gray-400 font-mono">ID: ${t.transactionId}</p>
-                        ${t.status === PackageStatus.ACTIVE ? `<button data-tx-id="${t.id}" class="download-invoice-btn text-sky-400 hover:text-sky-300 flex items-center gap-2 pt-2"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg> Download Invoice</button>` : ''}
+                        ${getStatusPillHTML(t.status)}
                     </div>
-                `;
-            }).join('') : `<div class="text-center p-8 text-gray-400">No purchase history found.</div>`;
+                    <div class="mt-4 pt-4 border-t border-gray-600 text-sm">
+                        <p class="text-gray-400 font-mono break-all">ID: ${t.transactionId}</p>
+                        ${t.status === PackageStatus.ACTIVE && t.type !== 'DEBIT_PAYMENT' ? `<button data-tx-id="${t.id}" class="download-invoice-btn text-sky-400 hover:text-sky-300 mt-2 inline-flex items-center gap-2" title="Download Invoice"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg> Invoice</button>` : ''}
+                    </div>
+                </div>`;
+            }).join('')}</div>`;
 
-            const historyHTML = `
-                <h2 class="text-2xl font-bold text-sky-300 mb-6">Your Purchase History</h2>
+            const historyTableHTML = `
                 <div class="hidden md:block bg-gray-800/50 border border-gray-700 rounded-lg overflow-x-auto">
                     <table class="w-full text-left">
-                        <thead class="bg-gray-900/70"><tr><th class="p-4">Package</th><th class="p-4">Date</th><th class="p-4">Status</th><th class="p-4">Transaction ID</th><th class="p-4">Invoice</th></tr></thead>
-                        <tbody class="divide-y divide-gray-700">${historyTableHTML}</tbody>
+                        <thead class="bg-gray-900/70"><tr><th class="p-4">Description</th><th class="p-4">Date</th><th class="p-4">Status</th><th class="p-4">Transaction ID</th><th class="p-4">Invoice</th></tr></thead>
+                        <tbody class="divide-y divide-gray-700">${userTransactions.map(t => {
+                            const aPackage = wifiPackages.find(p => p.id === t.packageId);
+                            const description = t.type === 'DEBIT_PAYMENT' ? `Debit Payment (Rs ${t.amount.toFixed(2)})` : aPackage?.name || 'N/A';
+                            return `<tr class="hover:bg-gray-700/50 transition-colors">
+                                      <td class="p-4 font-medium">${description}</td>
+                                      <td class="p-4 text-gray-300">${new Date(t.purchaseDate).toLocaleDateString()}</td>
+                                      <td class="p-4">${getStatusPillHTML(t.status)}</td>
+                                      <td class="p-4 text-gray-400 font-mono text-sm">${t.transactionId}</td>
+                                      <td class="p-4">${t.status === PackageStatus.ACTIVE && t.type !== 'DEBIT_PAYMENT' ? `<button data-tx-id="${t.id}" class="download-invoice-btn text-sky-400 hover:text-sky-300" title="Download Invoice"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg></button>` : ''}</td>
+                                    </tr>`;
+                        }).join('')}</tbody>
                     </table>
-                </div>
-                <div class="md:hidden space-y-4">${historyCardsHTML}</div>
-            `;
+                </div>`;
+
+            const historyHTML = `<h2 class="text-2xl font-bold text-sky-300 mb-6">Your Purchase History</h2>` + (userTransactions.length > 0 ? (historyCardsHTML + historyTableHTML) : `<div class="text-center p-8 text-gray-400">No purchase history found.</div>`);
 
             const supportHTML = `
               <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6">
                     <h2 class="text-2xl font-bold text-sky-300 mb-6">Submit a Complaint</h2>
                     <form id="complaint-form">
-                        <div class="mb-4">
-                            <label for="subject" class="block text-gray-300 font-medium mb-2">Subject</label>
-                            <input type="text" id="subject" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-sky-500" required/>
-                        </div>
-                        <div class="mb-6">
-                            <label for="message" class="block text-gray-300 font-medium mb-2">Message</label>
-                            <textarea id="message" rows="5" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-sky-500" required></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-sky-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-500 transition-colors">Submit</button>
+                        <div class="mb-4"><label for="subject" class="block text-gray-300 font-medium mb-2">Subject</label><input type="text" id="subject" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white" required/></div>
+                        <div class="mb-6"><label for="message" class="block text-gray-300 font-medium mb-2">Message</label><textarea id="message" rows="5" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white" required></textarea></div>
+                        <button type="submit" class="w-full bg-sky-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-500">Submit</button>
                     </form>
                 </div>
-                <div>
+                <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6">
                      <h3 class="text-xl font-bold text-sky-300 mb-4">Your Complaint History</h3>
-                      <div class="bg-gray-800/50 border border-gray-700 rounded-lg overflow-hidden">
-                        <table class="w-full text-left">
-                           <thead class="bg-gray-900/70"><tr><th class="p-4">Date</th><th class="p-4">Subject</th><th class="p-4">Status</th></tr></thead>
-                            <tbody class="divide-y divide-gray-700">
-                            ${userComplaints.length > 0 ? userComplaints.map(c => `
-                                <tr class="hover:bg-gray-700/50">
-                                    <td class="p-4 text-gray-300">${new Date(c.timestamp).toLocaleDateString()}</td>
-                                    <td class="p-4 font-medium">${c.subject}</td>
-                                    <td class="p-4">${getStatusPillHTML(c.status)}</td>
-                                </tr>`).join('') : `<tr><td colspan="3" class="text-center p-8 text-gray-400">No complaints filed.</td></tr>`}
-                            </tbody>
-                        </table>
+                      <div class="space-y-4 max-h-96 overflow-y-auto pr-2">${complaints.filter(c => c.userId === currentUser.id).length > 0 ? complaints.filter(c => c.userId === currentUser.id).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)).map(c => `
+                            <div class="border-b border-gray-700 pb-2">
+                                <div class="flex justify-between items-center"><p class="font-medium">${c.subject}</p>${getStatusPillHTML(c.status)}</div>
+                                <p class="text-sm text-gray-400 mt-1">${new Date(c.timestamp).toLocaleString()}</p>
+                            </div>`).join('') : `<p class="text-center p-8 text-gray-400">No complaints filed.</p>`}
                     </div>
                 </div>
               </div>`;
               
+            // Profile Analytics Calculation
+            const totalPackages = userTransactions.filter(t => t.status !== PackageStatus.REJECTED && t.type === 'PACKAGE_PURCHASE').length;
+            const totalComplaints = complaints.filter(c => c.userId === freshCurrentUser.id).length;
+            let packageMeterHTML = '';
+
+            if (activeTransaction && activePackage && activeTransaction.activationDate && activeTransaction.expiryDate) {
+                const startDate = new Date(activeTransaction.activationDate);
+                const expiryDate = new Date(activeTransaction.expiryDate);
+                const totalDuration = (expiryDate - startDate) / (1000 * 60 * 60 * 24);
+                const daysLeft = Math.max(0, Math.ceil((expiryDate - new Date()) / (1000 * 60 * 60 * 24)));
+                const percentageLeft = totalDuration > 0 ? (daysLeft / totalDuration) * 100 : 0;
+                const circumference = 2 * Math.PI * 50; // radius of 50
+                const strokeOffset = circumference - (percentageLeft / 100) * circumference;
+
+                packageMeterHTML = `
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6 flex flex-col items-center justify-center text-center">
+                        <h3 class="text-xl font-bold text-sky-300 mb-4">Active Package Status</h3>
+                        <div class="relative w-40 h-40">
+                            <svg class="w-full h-full" viewBox="0 0 120 120">
+                                <circle class="text-gray-700" stroke-width="10" stroke="currentColor" fill="transparent" r="50" cx="60" cy="60"/>
+                                <circle class="text-sky-400 transition-all duration-1000" stroke-width="10" stroke-dasharray="${circumference}" stroke-dashoffset="${strokeOffset}" stroke-linecap="round" stroke="currentColor" fill="transparent" r="50" cx="60" cy="60" transform="rotate(-90 60 60)"/>
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span class="text-3xl font-bold text-white">${daysLeft}</span>
+                                <span class="text-sm text-gray-400">Days Left</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 mt-4">Your <strong class="text-white">${activePackage.name}</strong> expires on ${expiryDate.toLocaleDateString()}.</p>
+                    </div>
+                </div>`;
+            }
+
+            const profileHTML = `
+                <div class="space-y-8">
+                    <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6 sm:p-8 max-w-4xl mx-auto">
+                        <h2 class="text-2xl font-bold text-sky-300 mb-6">My Profile</h2>
+                        <div class="flex flex-col md:flex-row items-center gap-8">
+                            <div class="relative">
+                                ${generateAvatarHTML(freshCurrentUser, 'w-32 h-32', 'text-5xl')}
+                                <span class="absolute bottom-2 right-2 h-4 w-4 bg-green-400 rounded-full border-2 border-gray-800" title="Online"></span>
+                            </div>
+                            <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-lg">
+                                <div><strong class="text-gray-400">Name:</strong> <span class="text-white">${freshCurrentUser.name}</span></div>
+                                <div><strong class="text-gray-400">Email:</strong> <span class="text-white">${freshCurrentUser.email}</span></div>
+                                <div class="sm:col-span-2"><strong class="text-gray-400">Address:</strong> <span class="text-white">${freshCurrentUser.address || 'N/A'}</span></div>
+                                <div><strong class="text-gray-400">CNIC:</strong> <span class="text-white font-mono">${freshCurrentUser.cnic || 'N/A'}</span></div>
+                                <div class="flex items-center gap-2">
+                                    <strong class="text-gray-400">Pending Debit:</strong>
+                                    <span class="text-white font-mono">Rs ${Number(freshCurrentUser.debitInfo || 0).toFixed(2)}</span>
+                                    ${Number(freshCurrentUser.debitInfo || 0) > 0 ? `<button id="pay-debit-btn" class="bg-yellow-500/20 hover:bg-yellow-500/40 text-yellow-300 text-xs font-bold py-1 px-2 rounded-md transition-all">Pay Now</button>` : ''}
+                                </div>
+                                <div><strong class="text-gray-400">All Time Payment:</strong> <span class="text-white font-mono">Rs ${Number(freshCurrentUser.allTimePayment || 0).toFixed(2)}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="max-w-4xl mx-auto">
+                        <h3 class="text-xl font-bold text-sky-300 mb-4">Activity at a Glance</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6 text-center">
+                                <p class="text-4xl font-bold text-sky-400">${totalPackages}</p>
+                                <p class="text-gray-400 mt-2">Packages Purchased</p>
+                            </div>
+                            <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6 text-center">
+                                <p class="text-4xl font-bold text-sky-400">${totalComplaints}</p>
+                                <p class="text-gray-400 mt-2">Complaints Filed</p>
+                            </div>
+                            <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6 text-center">
+                                <p class="text-4xl font-bold text-sky-400">Rs ${Number(freshCurrentUser.allTimePayment || 0).toFixed(0)}</p>
+                                <p class="text-gray-400 mt-2">All Time Spending</p>
+                            </div>
+                        </div>
+                    </div>
+                    ${packageMeterHTML}
+                </div>`;
+
             const notificationsHTML = `
                 <div class="absolute right-0 mt-2 w-full max-w-xs sm:w-80 bg-gray-800 border border-gray-700 rounded-lg shadow-lg z-10">
                     <div class="p-3 font-bold border-b border-gray-700">Notifications</div>
                     <div class="max-h-96 overflow-y-auto">
-                        ${userNotifications.length > 0 ? [...userNotifications].reverse().map(n => `
+                        ${userNotifications.length > 0 ? userNotifications.map(n => `
                             <div class="p-3 border-b border-gray-700/50 ${!n.read ? 'bg-sky-900/50' : ''}">
                                 <p class="text-sm text-gray-300">${n.message}</p>
                                 <p class="text-xs text-gray-500 mt-1">${new Date(n.timestamp).toLocaleString()}</p>
                             </div>`).join('') : '<p class="p-4 text-sm text-gray-400">No new notifications.</p>'}
                     </div>
-                    ${hasUnread ? `<div class="p-2 text-center border-t border-gray-700/50"><button id="mark-all-read-btn" class="text-sm font-medium text-sky-400 hover:text-sky-300">Mark all as read</button></div>` : ''}
+                    ${hasUnread ? `<div class="p-2 text-center"><button id="mark-all-read-btn" class="text-sm font-medium text-sky-400 hover:text-sky-300">Mark all as read</button></div>` : ''}
                 </div>`;
-                
-            const activeClass = 'text-sky-400 border-b-2 border-sky-400';
-            const inactiveClass = 'text-gray-400 hover:text-white';
             
-            let mainContentHTML = '';
-            switch(view) {
-                case 'history': mainContentHTML = historyHTML; break;
-                case 'support': mainContentHTML = supportHTML; break;
-                default: mainContentHTML = `${activePackageHTML} <h2 class="text-2xl font-bold text-sky-300 mb-6">Available Packages</h2> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">${packagesHTML}</div>`;
-            }
-
+            const mainContentMap = {
+                history: historyHTML,
+                support: supportHTML,
+                profile: profileHTML,
+                default: `${activePackageHTML} <h2 class="text-2xl font-bold text-sky-300 mb-6">Available Packages</h2> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">${packagesHTML}</div>`
+            };
+            const mainContentHTML = mainContentMap[view] || mainContentMap.default;
+            
             dashboardEl.innerHTML = `
-            <div class="min-h-screen bg-gray-900 text-white p-4 sm:p-6 lg:p-8">
-              <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 sm:gap-0">
-                <div class="flex-1">
-                  <h1 class="text-3xl font-bold text-glow">Welcome, <span class="text-sky-400">${freshCurrentUser.name}</span></h1>
-                  ${freshCurrentUser.assignId ? `<p class="text-sm text-gray-400 font-mono mt-1">Assign ID: ${freshCurrentUser.assignId}</p>` : ''}
-                </div>
-                <div class="flex items-center gap-4 self-end sm:self-center">
-                    <button id="theme-switcher-customer" class="theme-switcher-btn text-gray-300 hover:text-white transition-colors"></button>
-                    <div class="relative">
-                        <button id="notification-bell" class="relative text-gray-300 hover:text-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
-                            ${hasUnread ? '<span class="absolute top-0 right-0 h-3 w-3 rounded-full bg-sky-500 border-2 border-gray-900"></span>' : ''}
-                        </button>
-                        <div id="notification-dropdown" class="hidden-view">${notificationsHTML}</div>
-                    </div>
-                    <button id="customer-logout-btn" class="bg-gray-700/50 hover:bg-red-500/50 border border-gray-600 hover:border-red-500 text-white font-bold py-2 px-4 rounded-lg transition-colors flex items-center gap-2">
-                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg> <span class="hidden sm:inline">Logout</span>
-                    </button>
-                </div>
-              </header>
-              <div class="w-full overflow-x-auto">
-                <div class="flex space-x-4 border-b border-gray-700 mb-6">
-                  <button data-view="dashboard" class="customer-nav-btn py-2 px-4 font-medium transition-colors whitespace-nowrap ${view === 'dashboard' ? activeClass : inactiveClass}">Dashboard</button>
-                  <button data-view="history" class="customer-nav-btn py-2 px-4 font-medium transition-colors whitespace-nowrap ${view === 'history' ? activeClass : inactiveClass}">Purchase History</button>
-                  <button data-view="support" class="customer-nav-btn py-2 px-4 font-medium transition-colors whitespace-nowrap ${view === 'support' ? activeClass : inactiveClass}">Support & Complaints</button>
-                </div>
+            <div class="min-h-screen bg-gray-900 text-white flex flex-col">
+              <div class="flex-grow">
+                <header class="flex flex-wrap justify-between items-center mb-8 gap-4 p-4 sm:p-6 lg:p-8">
+                  <div>
+                    <h1 class="text-3xl font-bold text-glow">Welcome, <span class="text-sky-400">${freshCurrentUser.name}</span></h1>
+                    ${freshCurrentUser.consumerId ? `<p class="text-sm text-gray-400 font-mono mt-1">Consumer ID: ${freshCurrentUser.consumerId}</p>` : ''}
+                  </div>
+                  <div class="flex items-center gap-4">
+                      <button class="theme-switcher-btn text-gray-300 hover:text-white transition-colors"></button>
+                      <div class="relative"><button id="notification-bell" class="relative text-gray-300 hover:text-white transition-colors"><svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>${hasUnread ? '<span class="absolute top-0 right-0 h-3 w-3 rounded-full bg-sky-500 border-2 border-gray-900"></span>' : ''}</button><div id="notification-dropdown" class="hidden-view">${notificationsHTML}</div></div>
+                      <button id="customer-logout-btn" class="bg-gray-700/50 hover:bg-red-500/50 border border-gray-600 hover:border-red-500 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2 transition-all"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg><span class="hidden sm:inline">Logout</span></button>
+                  </div>
+                </header>
+                <nav class="border-b border-gray-700 mb-6 px-4 sm:px-6 lg:px-8"><div class="flex space-x-1 sm:space-x-4 overflow-x-auto pb-2">${['Dashboard', 'History', 'Support', 'Profile'].map(item => `<button data-view="${item.toLowerCase().replace(' ', '-')}" class="customer-nav-btn py-2 px-3 sm:px-4 font-medium transition-colors whitespace-nowrap ${view === item.toLowerCase() ? 'text-sky-400 border-b-2 border-sky-400' : 'text-gray-400 hover:text-white'}">${item}</button>`).join('')}</div></nav>
+                <main class="p-4 sm:p-6 lg:p-8 animate-fade-in">${mainContentHTML}</main>
               </div>
-              <main id="customer-main-content">${mainContentHTML}</main>
+              <footer class="py-4 px-8 text-center text-xs text-gray-500 border-t border-gray-700">
+                Made & Designed by <span class="text-glow font-semibold text-sky-400">Hussain</span>
+              </footer>
             </div>`;
         }
         
-        function renderPurchaseModal(aPackage) {
-            const container = document.getElementById('purchase-modal-container');
-            container.innerHTML = `
-             <div class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                <div class="bg-gray-800 border border-sky-500 rounded-2xl p-8 max-w-lg w-full shadow-2xl shadow-sky-500/20">
-                    <h2 class="text-2xl font-bold text-sky-300 mb-4">Purchase: ${aPackage.name}</h2>
-                    <div class="bg-gray-900 p-4 rounded-lg mb-6">
-                        <p class="text-gray-300">Please send <span class="font-bold text-white">$${aPackage.price}</span> to the following account:</p>
-                        <p class="mt-2 text-lg"><span class="text-gray-400">Name:</span> <span class="font-mono text-sky-400">${adminAccount.name}</span></p>
-                        <p><span class="text-gray-400">Account:</span> <span class="font-mono text-sky-400">${adminAccount.accountNumber}</span></p>
-                    </div>
-                    <form id="purchase-form">
-                        <label for="transactionId" class="block text-gray-300 font-medium mb-2">Enter Transaction ID</label>
-                        <input type="text" id="transactionId" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="e.g., A1B2C3D4E5" required />
-                        <div class="flex flex-col sm:flex-row gap-4 mt-6">
-                            <button type="button" id="cancel-purchase" class="w-full bg-gray-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-500 transition-colors">Cancel</button>
-                            <button type="submit" class="w-full bg-sky-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-500 transition-colors">Submit for Approval</button>
-                        </div>
-                    </form>
-                </div>
-             </div>`;
-
-            const close = () => { playSound('click'); container.innerHTML = ''; };
-            document.getElementById('cancel-purchase').addEventListener('click', close);
-            document.getElementById('purchase-form').addEventListener('submit', (e) => {
-                e.preventDefault();
-                const txId = document.getElementById('transactionId').value;
-                if(txId.trim()){
-                    playSound('click');
-                    handlePurchase(aPackage.id, txId);
-                    close();
-                }
-            });
-        }
-        
         // --- ADMIN DASHBOARD RENDERING ---
-        function renderAdminDashboard(view = 'transactions') {
+        function renderAdminDashboard(view = 'dashboard') {
             const dashboardEl = document.getElementById('admin-dashboard');
             
-            const pendingTransactions = transactions.filter(t => t.status === PackageStatus.PENDING);
-            const pendingComplaints = complaints.filter(c => c.status === ComplaintStatus.PENDING);
-            const customerUsers = users.filter(u => u.role === Role.CUSTOMER);
+            const totalCustomers = users.filter(u => u.role === Role.CUSTOMER).length;
+            const totalRevenue = transactions.filter(t => (t.status === PackageStatus.ACTIVE || t.status === PackageStatus.EXPIRED) && t.type !== 'DEBIT_PAYMENT').reduce((sum, t) => sum + (wifiPackages.find(p => p.id === t.packageId)?.price || 0), 0);
+            const pendingComplaintsCount = complaints.filter(c => c.status === ComplaintStatus.PENDING).length;
 
-            // --- TRANSACTIONS VIEW ---
-            const transactionsTableHTML = pendingTransactions.map(t => {
-                const customer = users.find(u => u.id === t.userId);
-                const aPackage = wifiPackages.find(p => p.id === t.packageId);
-                return `<tr class="hover:bg-gray-700/50">
-                    <td class="p-4 font-medium">${customer?.name}</td><td class="p-4 text-gray-300">${aPackage?.name}</td>
-                    <td class="p-4 text-gray-400 font-mono text-sm">${t.transactionId}</td><td class="p-4 text-gray-300">${new Date(t.purchaseDate).toLocaleDateString()}</td>
-                    <td class="p-4 flex gap-2">
-                        <button data-tx-id="${t.id}" class="approve-btn p-2 bg-green-500/20 text-green-400 rounded-full hover:bg-green-500/40" title="Approve"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></button>
-                        <button data-tx-id="${t.id}" class="reject-btn p-2 bg-red-500/20 text-red-400 rounded-full hover:bg-red-500/40" title="Reject"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></button>
-                    </td>
-                </tr>`;
-            }).join('');
-            const transactionsCardsHTML = pendingTransactions.map(t => {
-                const customer = users.find(u => u.id === t.userId);
-                const aPackage = wifiPackages.find(p => p.id === t.packageId);
-                return `<div class="bg-gray-800/50 border border-gray-700 rounded-lg p-4 space-y-2">
-                    <div class="flex justify-between items-start">
-                        <span class="font-medium text-white">${customer?.name} - ${aPackage?.name}</span>
-                        <span class="text-sm text-gray-300">${new Date(t.purchaseDate).toLocaleDateString()}</span>
-                    </div>
-                    <p class="text-sm text-gray-400 font-mono">ID: ${t.transactionId}</p>
-                    <div class="flex gap-2 pt-2">
-                         <button data-tx-id="${t.id}" class="approve-btn flex-1 bg-green-500/20 text-green-400 rounded-lg hover:bg-green-500/40 py-2 px-3 text-sm flex items-center justify-center gap-2">Approve</button>
-                         <button data-tx-id="${t.id}" class="reject-btn flex-1 bg-red-500/20 text-red-400 rounded-lg hover:bg-red-500/40 py-2 px-3 text-sm flex items-center justify-center gap-2">Reject</button>
-                    </div>
-                </div>`;
-            }).join('');
-            const transactionsView = `
-                <h2 class="text-2xl font-bold text-sky-300 mb-2">Pending Transaction Approvals</h2>
-                <p class="text-gray-400 mb-6">Review submitted transaction IDs. Approve valid payments to activate customer packages or reject them if the ID is incorrect.</p>
-                <div class="hidden md:block bg-gray-800/50 border border-gray-700 rounded-lg overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead class="bg-gray-900/70"><tr><th class="p-4">Customer</th><th class="p-4">Package</th><th class="p-4">Transaction ID</th><th class="p-4">Date</th><th class="p-4">Actions</th></tr></thead>
-                        <tbody class="divide-y divide-gray-700">${pendingTransactions.length > 0 ? transactionsTableHTML : `<tr><td colspan="5" class="text-center p-8 text-gray-400">No pending transactions.</td></tr>`}</tbody>
-                    </table>
-                </div>
-                <div class="md:hidden space-y-4">${pendingTransactions.length > 0 ? transactionsCardsHTML : `<div class="text-center p-8 text-gray-400">No pending transactions.</div>`}</div>`;
-
-            // --- HISTORY VIEW ---
-            const allTransactions = [...transactions].sort((a, b) => new Date(b.purchaseDate).getTime() - new Date(a.purchaseDate).getTime());
-            const historyTableHTML = allTransactions.map(t => {
-                const customer = users.find(u => u.id === t.userId);
-                const aPackage = wifiPackages.find(p => p.id === t.packageId);
-                const isApproved = t.status === PackageStatus.ACTIVE || t.status === PackageStatus.EXPIRED;
-                return `<tr class="hover:bg-gray-700/50">
-                    <td class="p-4 font-medium">${customer?.name || 'N/A'}</td><td class="p-4 text-gray-300">${aPackage?.name || 'N/A'}</td>
-                    <td class="p-4 text-gray-400 font-mono text-sm">${t.transactionId}</td><td class="p-4 text-gray-300">${new Date(t.purchaseDate).toLocaleDateString()}</td>
-                    <td class="p-4">${getStatusPillHTML(t.status)}</td>
-                    <td class="p-4">${isApproved ? `<button data-tx-id="${t.id}" class="download-admin-invoice-btn text-sky-400 hover:text-sky-300" title="Download Invoice"><svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg></button>` : ''}</td>
-                </tr>`;
-            }).join('');
-            const historyCardsHTML = allTransactions.map(t => {
-                 const customer = users.find(u => u.id === t.userId);
-                const aPackage = wifiPackages.find(p => p.id === t.packageId);
-                const isApproved = t.status === PackageStatus.ACTIVE || t.status === PackageStatus.EXPIRED;
-                return `<div class="bg-gray-800/50 border border-gray-700 rounded-lg p-4 space-y-2">
-                    <div class="flex justify-between items-start">
-                        <span class="font-medium text-white">${customer?.name || 'N/A'} - ${aPackage?.name || 'N/A'}</span>
-                        ${getStatusPillHTML(t.status)}
-                    </div>
-                    <p class="text-sm text-gray-300">Date: ${new Date(t.purchaseDate).toLocaleDateString()}</p>
-                    <p class="text-sm text-gray-400 font-mono">ID: ${t.transactionId}</p>
-                    ${isApproved ? `<button data-tx-id="${t.id}" class="download-admin-invoice-btn text-sky-400 hover:text-sky-300 flex items-center gap-2 pt-2"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg> Download Invoice</button>` : ''}
-                </div>`;
-            }).join('');
-            const historyView = `
-                <div class="hidden md:block bg-gray-800/50 border border-gray-700 rounded-lg overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead class="bg-gray-900/70"><tr><th class="p-4">Customer</th><th class="p-4">Package</th><th class="p-4">Transaction ID</th><th class="p-4">Date</th><th class="p-4">Status</th><th class="p-4">Invoice</th></tr></thead>
-                        <tbody class="divide-y divide-gray-700">${allTransactions.length > 0 ? historyTableHTML : `<tr><td colspan="6" class="text-center p-8 text-gray-400">No transactions found.</td></tr>`}</tbody>
-                    </table>
-                </div>
-                <div class="md:hidden space-y-4">${allTransactions.length > 0 ? historyCardsHTML : `<div class="text-center p-8 text-gray-400">No transactions found.</div>`}</div>`;
-
-            // --- CUSTOMERS VIEW ---
-            const customersTableHTML = customerUsers.map(u => {
-                const activeTx = transactions.find(t => t.userId === u.id && t.status === PackageStatus.ACTIVE);
-                const activePkg = activeTx ? wifiPackages.find(p => p.id === activeTx.packageId) : null;
-                return `<tr class="hover:bg-gray-700/50">
-                    <td class="p-4 font-medium">${u.name}</td><td class="p-4 text-gray-300">${u.email}</td>
-                    <td class="p-4 font-mono text-sm" id="assign-id-cell-${u.id}"><button data-user-id="${u.id}" class="edit-assign-id-btn hover:text-sky-300 transition-colors">${u.assignId || '<span class="text-gray-400 italic">Not Set</span>'}</button></td>
-                    <td class="p-4 text-sky-400">${activePkg?.name || 'None'}</td><td class="p-4 text-gray-400">${new Date(u.createdAt).toLocaleDateString()}</td>
-                </tr>`;
-            }).join('');
-            const customersCardsHTML = customerUsers.map(u => {
-                const activeTx = transactions.find(t => t.userId === u.id && t.status === PackageStatus.ACTIVE);
-                const activePkg = activeTx ? wifiPackages.find(p => p.id === activeTx.packageId) : null;
-                 return `<div class="bg-gray-800/50 border border-gray-700 rounded-lg p-4 space-y-2">
-                    <div class="flex justify-between items-start"><span class="font-medium text-white">${u.name}</span><span class="text-sm text-gray-400">Joined: ${new Date(u.createdAt).toLocaleDateString()}</span></div>
-                    <p class="text-sm text-gray-300">${u.email}</p>
-                    <p class="text-sm">Active Pkg: <span class="text-sky-400">${activePkg?.name || 'None'}</span></p>
-                    <div class="text-sm font-mono pt-1" id="assign-id-cell-mobile-${u.id}">Assign ID: <button data-user-id="${u.id}" class="edit-assign-id-btn hover:text-sky-300 transition-colors">${u.assignId || '<span class="text-gray-400 italic">Not Set</span>'}</button></div>
-                 </div>`;
-            }).join('');
-            const customersView = `
-                <div>
-                    <div class="flex justify-end mb-4">
-                        <button id="download-user-data-btn" class="bg-sky-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-500 transition-colors flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg> Download All Data</button>
-                    </div>
-                    <div class="hidden md:block bg-gray-800/50 border border-gray-700 rounded-lg overflow-x-auto">
-                        <table class="w-full text-left">
-                            <thead class="bg-gray-900/70"><tr><th class="p-4">Name</th><th class="p-4">Email</th><th class="p-4">Assign ID</th><th class="p-4">Active Package</th><th class="p-4">Joined</th></tr></thead>
-                            <tbody class="divide-y divide-gray-700" id="customer-table-body">${customersTableHTML}</tbody>
-                        </table>
-                    </div>
-                    <div class="md:hidden space-y-4" id="customer-card-body">${customersCardsHTML}</div>
-                </div>`;
+            const navItems = [
+                { id: 'dashboard', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 012-2h2a2 2 0 012 2v6m-6 0h6M4 6h16M4 10h16M4 14h16M4 18h16" />', label: 'Dashboard' },
+                { id: 'customers', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.184-1.268-.5-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.184-1.268.5-1.857m0 0a5.002 5.002 0 019 0m-9 0a5.002 5.002 0 00-9 0" />', label: 'Customers' },
+                { id: 'add-customer', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />', label: 'Add Customer' },
+                { id: 'transactions', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />', label: 'Transactions' },
+                { id: 'complaints', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />', label: 'Complaints', badge: pendingComplaintsCount },
+                { id: 'broadcast', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />', label: 'Broadcast' },
+                { id: 'packages', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.293 2.293a1 1 0 010 1.414L10 12l5.707 5.293a1 1 0 010 1.414L13 21m-2-2l-2.293-2.293a1 1 0 010-1.414L13 12 7.293 6.707a1 1 0 010-1.414L10 3h2z" />', label: 'Packages' },
+                { id: 'settings', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />', label: 'Settings' },
+            ];
             
-            // --- COMPLAINTS VIEW ---
-            const sortedComplaints = complaints.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-            const complaintsTableHTML = sortedComplaints.map(c => {
-                 const customer = users.find(u => u.id === c.userId);
-                 return `<tr class="hover:bg-gray-700/50">
-                    <td class="p-4 font-medium">${customer?.name}</td><td class="p-4 text-gray-300">${c.subject}</td>
-                    <td class="p-4 text-gray-400 max-w-sm truncate hidden md:table-cell">${c.message}</td><td class="p-4 text-gray-300">${new Date(c.timestamp).toLocaleDateString()}</td>
-                    <td class="p-4">${getStatusPillHTML(c.status)}</td>
-                    <td class="p-4">${c.status === ComplaintStatus.PENDING ? `<button data-complaint-id="${c.id}" class="resolve-complaint-btn p-2 bg-green-500/20 text-green-400 rounded-full hover:bg-green-500/40" title="Mark as Resolved"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></button>` : ''}</td>
-                 </tr>`;
-            }).join('');
-            const complaintsCardsHTML = sortedComplaints.map(c => {
-                 const customer = users.find(u => u.id === c.userId);
-                 return `<div class="bg-gray-800/50 border border-gray-700 rounded-lg p-4 space-y-2">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <p class="font-medium text-white">${c.subject}</p>
-                            <p class="text-sm text-gray-300">${customer?.name}</p>
-                        </div>
-                        ${getStatusPillHTML(c.status)}
-                    </div>
-                    <p class="text-sm text-gray-400 pt-2">${c.message}</p>
-                    <div class="flex justify-between items-center pt-2">
-                        <span class="text-xs text-gray-500">${new Date(c.timestamp).toLocaleString()}</span>
-                        ${c.status === ComplaintStatus.PENDING ? `<button data-complaint-id="${c.id}" class="resolve-complaint-btn bg-green-500/20 text-green-400 rounded-lg hover:bg-green-500/40 py-1 px-3 text-sm flex items-center gap-2">Resolve</button>` : ''}
-                    </div>
-                 </div>`;
-            }).join('');
-            const complaintsView = `
-                <div class="flex justify-end mb-4">
-                    <button id="download-complaints-btn" class="bg-sky-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-500 transition-colors flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg> Download Complaints</button>
-                </div>
-                <div class="hidden md:block bg-gray-800/50 border border-gray-700 rounded-lg overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead class="bg-gray-900/70"><tr><th class="p-4">Customer</th><th class="p-4">Subject</th><th class="p-4 hidden md:table-cell">Message</th><th class="p-4">Date</th><th class="p-4">Status</th><th class="p-4">Actions</th></tr></thead>
-                        <tbody class="divide-y divide-gray-700">${complaints.length > 0 ? complaintsTableHTML : `<tr><td colspan="6" class="text-center p-8 text-gray-400">No complaints found.</td></tr>`}</tbody>
-                    </table>
-                </div>
-                <div class="md:hidden space-y-4">${complaints.length > 0 ? complaintsCardsHTML : `<div class="text-center p-8 text-gray-400">No complaints found.</div>`}</div>`;
-
-            // --- PACKAGES VIEW ---
-            const packagesTableHTML = wifiPackages.map(p => `
-                <tr class="hover:bg-gray-700/50">
-                    <td class="p-4 font-medium">${p.name}</td><td class="p-4 text-gray-300">${p.speed}</td>
-                    <td class="p-4 font-mono text-sky-400">$${p.price.toFixed(2)}</td>
-                    <td class="p-4"><button data-package-id="${p.id}" class="edit-package-btn bg-sky-600/80 text-white font-bold py-1 px-3 rounded hover:bg-sky-500">Edit</button></td>
-                </tr>`).join('');
-            const packagesCardsHTML = wifiPackages.map(p => `
-                <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-4">
-                    <div class="flex justify-between items-start">
-                        <div><p class="font-medium text-white">${p.name}</p><p class="text-sm text-gray-300">${p.speed}</p></div>
-                        <p class="font-mono text-sky-400 text-lg">$${p.price.toFixed(2)}</p>
-                    </div>
-                    <div class="mt-4"><button data-package-id="${p.id}" class="edit-package-btn w-full bg-sky-600/80 text-white font-bold py-2 px-4 rounded hover:bg-sky-500">Edit</button></div>
-                </div>`).join('');
-            const packagesView = `
-                <div class="hidden md:block bg-gray-800/50 border border-gray-700 rounded-lg overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead class="bg-gray-900/70"><tr><th class="p-4">Package Name</th><th class="p-4">Speed / Description</th><th class="p-4">Price</th><th class="p-4">Actions</th></tr></thead>
-                        <tbody class="divide-y divide-gray-700">${packagesTableHTML}</tbody>
-                    </table>
-                </div>
-                <div class="md:hidden space-y-4">${packagesCardsHTML}</div>`;
-
-            // --- SETTINGS VIEW ---
-            const settingsView = `
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-8">
-                        <h3 class="text-xl font-bold text-sky-300 mb-6">Change Admin Credentials</h3>
-                        <form id="credentials-form">
-                            <div class="mb-4"><label class="block text-gray-300 font-medium mb-2">Username</label><input type="text" id="admin-username" value="${currentUser.email}" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white" /></div>
-                            <div class="mb-6"><label class="block text-gray-300 font-medium mb-2">Password</label><input type="password" id="admin-password" value="${currentUser.password}" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white" /></div>
-                            <button type="submit" class="w-full bg-sky-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-500">Update Credentials</button>
-                        </form>
-                    </div>
-                    <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-8">
-                        <h3 class="text-xl font-bold text-sky-300 mb-6">Update Payment Account</h3>
-                        <form id="account-form">
-                            <div class="mb-4"><label class="block text-gray-300 font-medium mb-2">Account Name</label><input type="text" id="account-name" value="${adminAccount.name}" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white" /></div>
-                            <div class="mb-6"><label class="block text-gray-300 font-medium mb-2">Account Number</label><input type="text" id="account-number" value="${adminAccount.accountNumber}" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white" /></div>
-                            <button type="submit" class="w-full bg-sky-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-500">Update Account</button>
-                        </form>
-                    </div>
-                </div>`;
-            
-            // --- NOTIFICATIONS HISTORY VIEW ---
-            const allNotificationsSorted = [...notifications].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-            const notificationHistoryTableHTML = allNotificationsSorted.map(n => {
-                const recipientUser = users.find(u => u.id === n.userId);
-                const recipientText = n.userId === 'all' ? 'Broadcast' : (recipientUser ? `${recipientUser.name}` : 'Unknown');
-                return `<tr class="hover:bg-gray-700/50">
-                    <td class="p-4 text-gray-300 whitespace-nowrap">${new Date(n.timestamp).toLocaleString()}</td>
-                    <td class="p-4 font-medium">${recipientText}</td>
-                    <td class="p-4 text-gray-400">${n.message}</td>
-                </tr>`;
-            }).join('');
-            const notificationHistoryCardsHTML = allNotificationsSorted.map(n => {
-                const recipientUser = users.find(u => u.id === n.userId);
-                const recipientText = n.userId === 'all' ? 'Broadcast to Everyone' : (recipientUser ? `To: ${recipientUser.name}` : 'Unknown User');
-                return `<div class="bg-gray-800/50 border border-gray-700 rounded-lg p-4 space-y-2">
-                    <p class="text-sm text-gray-400">${n.message}</p>
-                    <div class="flex justify-between items-center text-xs pt-1">
-                        <span class="font-medium text-gray-300">${recipientText}</span>
-                        <span class="text-gray-500">${new Date(n.timestamp).toLocaleString()}</span>
-                    </div>
-                </div>`;
-            }).join('');
-            const notificationHistoryView = `
-                <h2 class="text-2xl font-bold text-sky-300 mb-6">Sent Notification History</h2>
-                <div class="hidden md:block bg-gray-800/50 border border-gray-700 rounded-lg overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead class="bg-gray-900/70"><tr><th class="p-4">Date</th><th class="p-4">Recipient</th><th class="p-4">Message</th></tr></thead>
-                        <tbody class="divide-y divide-gray-700">${allNotificationsSorted.length > 0 ? notificationHistoryTableHTML : `<tr><td colspan="3" class="text-center p-8 text-gray-400">No notifications have been sent.</td></tr>`}</tbody>
-                    </table>
-                </div>
-                <div class="md:hidden space-y-4">${allNotificationsSorted.length > 0 ? notificationHistoryCardsHTML : `<div class="text-center p-8 text-gray-400">No notifications have been sent.</div>`}</div>`;
-
-            const activeClass = 'text-sky-400 border-b-2 border-sky-400';
-            const inactiveClass = 'text-gray-400 hover:text-white';
-            
+            // --- MAIN CONTENT VIEWS ---
             let mainContentHTML = '';
             switch(view) {
-                case 'history': mainContentHTML = historyView; break;
-                case 'customers': mainContentHTML = customersView; break;
-                case 'complaints': mainContentHTML = complaintsView; break;
-                case 'notifications': mainContentHTML = notificationHistoryView; break;
-                case 'packages': mainContentHTML = packagesView; break;
-                case 'settings': mainContentHTML = settingsView; break;
-                default: mainContentHTML = transactionsView;
+                case 'dashboard':
+                    const activeSubscriptions = transactions.filter(t => t.status === PackageStatus.ACTIVE && t.type !== 'DEBIT_PAYMENT').length;
+                    const pendingApprovals = transactions.filter(t => t.status === PackageStatus.PENDING).length;
+
+                    // Customer Growth Chart Data
+                    const customerGrowthData = Array(6).fill(0).map((_, i) => {
+                        const d = new Date();
+                        d.setMonth(d.getMonth() - i);
+                        return { month: d.toLocaleString('default', { month: 'short' }), year: d.getFullYear(), count: 0 };
+                    }).reverse();
+
+                    users.filter(u => u.role === Role.CUSTOMER && u.createdAt).forEach(u => {
+                        const userDate = new Date(u.createdAt);
+                        const month = userDate.toLocaleString('default', { month: 'short' });
+                        const year = userDate.getFullYear();
+                        const entry = customerGrowthData.find(d => d.month === month && d.year === year);
+                        if (entry) entry.count++;
+                    });
+                    const maxGrowth = Math.max(...customerGrowthData.map(d => d.count), 1);
+                    const customerGrowthChartHTML = `
+                        <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700 col-span-1 lg:col-span-2">
+                            <h3 class="text-lg font-bold text-sky-300 mb-4">New Customers (Last 6 Months)</h3>
+                            <div class="flex justify-around items-end h-48 gap-4 pt-4">
+                                ${customerGrowthData.map(d => `
+                                    <div class="flex flex-col items-center flex-1 h-full justify-end">
+                                        <div class="text-sm font-bold text-white mb-1 transition-all" style="opacity: ${d.count > 0 ? 1 : 0};">${d.count}</div>
+                                        <div class="w-full bg-gray-700 rounded-t-md" style="height: ${(d.count / maxGrowth) * 100}%;">
+                                            <div class="w-full h-full bg-sky-500 rounded-t-md transition-all duration-500"></div>
+                                        </div>
+                                        <div class="text-xs text-gray-400 mt-2">${d.month}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>`;
+
+                    // Package Popularity Doughnut Chart
+                    const packageCounts = wifiPackages.map(p => ({
+                        ...p,
+                        count: transactions.filter(t => t.packageId === p.id && t.status !== PackageStatus.REJECTED && t.type === 'PACKAGE_PURCHASE').length
+                    })).filter(p => p.count > 0).sort((a, b) => b.count - a.count);
+
+                    const totalPackagesSold = packageCounts.reduce((sum, p) => sum + p.count, 0);
+                    const doughnutCircumference = 2 * Math.PI * 50;
+                    const packagePopularityChartHTML = totalPackagesSold > 0 ? `
+                        <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
+                            <h3 class="text-lg font-bold text-sky-300 mb-4">Package Popularity</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+                                <div class="relative w-32 h-32 mx-auto">
+                                    <svg class="w-full h-full" viewBox="0 0 120 120">
+                                        ${(() => {
+                                            const colors = ['#0ea5e9', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#14b8a6'];
+                                            let offset = 0;
+                                            return packageCounts.map((p, i) => {
+                                                const percentage = (p.count / totalPackagesSold);
+                                                const dash = percentage * doughnutCircumference;
+                                                const currentOffset = offset;
+                                                offset += dash;
+                                                return `<circle style="color: ${colors[i % colors.length]}" stroke-width="20" stroke-dasharray="${dash} ${doughnutCircumference}" stroke-dashoffset="-${currentOffset}" stroke-linecap="butt" stroke="currentColor" fill="transparent" r="50" cx="60" cy="60" transform="rotate(-90 60 60)" class="transition-all duration-500"/>`;
+                                            }).join('');
+                                        })()}
+                                    </svg>
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                        <span class="text-2xl font-bold text-white">${totalPackagesSold}</span>
+                                        <span class="text-xs text-gray-400">Sold</span>
+                                    </div>
+                                </div>
+                                <ul class="text-sm space-y-2">
+                                    ${(() => {
+                                        const colors = ['bg-sky-500', 'bg-emerald-500', 'bg-amber-500', 'bg-red-500', 'bg-violet-500', 'bg-teal-500'];
+                                        return packageCounts.map((p, i) => `
+                                            <li class="flex items-center gap-2">
+                                                <span class="w-3 h-3 rounded-full ${colors[i % colors.length]}"></span>
+                                                <span class="text-gray-300">${p.name}</span>
+                                                <span class="ml-auto font-bold text-white">${((p.count / totalPackagesSold) * 100).toFixed(0)}%</span>
+                                            </li>
+                                        `).join('');
+                                    })()}
+                                </ul>
+                            </div>
+                        </div>` : '';
+
+                    mainContentHTML = `
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-6">
+                            <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700"><h3 class="text-gray-400 text-sm">Total Customers</h3><p class="text-3xl font-bold text-sky-400 mt-2">${totalCustomers}</p></div>
+                            <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700"><h3 class="text-gray-400 text-sm">Total Revenue</h3><p class="text-3xl font-bold text-sky-400 mt-2">Rs ${totalRevenue.toFixed(0)}</p></div>
+                            <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700"><h3 class="text-gray-400 text-sm">Active Subscriptions</h3><p class="text-3xl font-bold text-green-400 mt-2">${activeSubscriptions}</p></div>
+                            <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700"><h3 class="text-gray-400 text-sm">Pending Approvals</h3><p class="text-3xl font-bold text-yellow-300 mt-2">${pendingApprovals}</p></div>
+                            <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700"><h3 class="text-gray-400 text-sm">Open Complaints</h3><p class="text-3xl font-bold text-red-400 mt-2">${pendingComplaintsCount}</p></div>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            ${customerGrowthChartHTML}
+                            ${packagePopularityChartHTML}
+                        </div>`;
+                    break;
+                case 'customers':
+                    mainContentHTML = `
+                        <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6">
+                            <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
+                                <h2 class="text-2xl font-bold text-sky-300">Customer Data</h2>
+                                <input type="text" id="customer-search" placeholder="Search by name, email, ID..." class="w-full sm:w-64 bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white">
+                            </div>
+                            <div id="customer-list-container"></div>
+                        </div>`;
+                    break;
+                case 'add-customer':
+                     mainContentHTML = `
+                        <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6 sm:p-8 max-w-3xl mx-auto">
+                           <h2 class="text-2xl font-bold text-sky-300 mb-6">Create New Customer Account</h2>
+                           <form id="add-customer-form" class="space-y-4">
+                               <div class="flex items-center gap-4">
+                                   <div id="profile-pic-preview-container" class="w-24 h-24 flex items-center justify-center">
+                                       <div class="w-24 h-24 bg-gray-700 rounded-full flex items-center justify-center text-gray-400 text-4xl font-bold border-2 border-gray-600">?</div>
+                                   </div>
+                                   <label class="block"><span class="text-gray-300">Profile Picture</span><input type="file" id="profile-pic-upload" accept="image/*" class="block w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-sky-600/50 file:text-sky-300 hover:file:bg-sky-600/80 cursor-pointer"></label>
+                               </div>
+                               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                   <div><label class="block text-gray-300">Full Name</label><input type="text" id="cust-name" class="w-full bg-gray-700 border-gray-600 rounded p-2 mt-1" required></div>
+                                   <div><label class="block text-gray-300">Email</label><input type="email" id="cust-email" class="w-full bg-gray-700 border-gray-600 rounded p-2 mt-1" required></div>
+                                   <div class="md:col-span-2"><label class="block text-gray-300">Address</label><input type="text" id="cust-address" class="w-full bg-gray-700 border-gray-600 rounded p-2 mt-1" required></div>
+                                   <div><label class="block text-gray-300">CNIC Number</label><input type="text" id="cust-cnic" class="w-full bg-gray-700 border-gray-600 rounded p-2 mt-1" required></div>
+                                   <div><label class="block text-gray-300">Initial Debit (Rs)</label><input type="number" id="cust-debit" min="0" step="0.01" value="0" class="w-full bg-gray-700 border-gray-600 rounded p-2 mt-1" required></div>
+                                   <div><label class="block text-gray-300">All Time Payment (Rs)</label><input type="number" id="cust-all-time-payment" min="0" step="0.01" value="0" class="w-full bg-gray-700 border-gray-600 rounded p-2 mt-1" required></div>
+                                   <div><label class="block text-gray-300">Set Password</label><input type="password" id="cust-password" class="w-full bg-gray-700 border-gray-600 rounded p-2 mt-1" required></div>
+                                   <div><label class="block text-gray-300">Consumer ID (Optional)</label><input type="text" id="cust-consumer-id" class="w-full bg-gray-700 border-gray-600 rounded p-2 mt-1"></div>
+                               </div>
+                               <div class="pt-4"><button type="submit" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold py-3 px-4 rounded-lg">Create Customer</button></div>
+                           </form>
+                        </div>`;
+                    break;
+                case 'transactions':
+                     mainContentHTML = `
+                        <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6">
+                            <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
+                                <h2 class="text-2xl font-bold text-sky-300">All Transactions</h2>
+                                <div class="flex items-center gap-2"><label class="text-gray-400">Filter:</label><select id="transaction-filter" class="bg-gray-700 border-gray-600 rounded px-3 py-1"><option value="all">All</option><option value="PENDING">Pending</option><option value="ACTIVE">Active</option><option value="REJECTED">Rejected</option><option value="EXPIRED">Expired</option></select></div>
+                            </div>
+                            <div id="transaction-list-container"></div>
+                        </div>`;
+                    break;
+                case 'complaints':
+                     mainContentHTML = `
+                        <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6">
+                            <h2 class="text-2xl font-bold text-sky-300 mb-4">Customer Complaints</h2>
+                            <div id="complaints-list-container"></div>
+                        </div>`;
+                    break;
+                case 'broadcast':
+                     mainContentHTML = `
+                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                             <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6 sm:p-8">
+                                <h2 class="text-2xl font-bold text-sky-300 mb-4">Send Broadcast Notification</h2>
+                                <form id="notification-form" class="space-y-4">
+                                    <div><label for="recipient" class="block text-gray-300 font-medium mb-2">Recipient</label><select id="recipient" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white"><option value="all">Broadcast to Everyone</option>${users.filter(u => u.role === Role.CUSTOMER).map(u => `<option value="${u.id}">${u.name}</option>`).join('')}</select></div>
+                                    <div><label for="notification-message" class="block text-gray-300 font-medium mb-2">Message</label><textarea id="notification-message" rows="4" class="w-full bg-gray-700 border-gray-600 rounded-lg px-4 py-2 text-white" required></textarea></div>
+                                    <button type="submit" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold py-2 px-4 rounded-lg">Send</button>
+                                </form>
+                            </div>
+                             <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6 sm:p-8">
+                                <h2 class="text-2xl font-bold text-sky-300 mb-4">Notification History</h2>
+                                <div id="notification-history-list" class="space-y-3 max-h-96 overflow-y-auto pr-2"></div>
+                            </div>
+                         </div>`;
+                    break;
+                case 'packages':
+                    mainContentHTML = `
+                        <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6">
+                            <div class="flex justify-between items-center mb-4">
+                               <h2 class="text-2xl font-bold text-sky-300">Manage WiFi Packages</h2>
+                               <button id="add-package-btn" class="bg-sky-600 hover:bg-sky-500 text-white font-bold py-2 px-4 rounded-lg">Add New Package</button>
+                            </div>
+                            <div id="package-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                        </div>`;
+                    break;
+                case 'settings':
+                    mainContentHTML = `
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6 sm:p-8">
+                                <h3 class="text-xl font-bold text-sky-300 mb-6">Admin Credentials</h3>
+                                <form id="credentials-form" class="space-y-4">
+                                    <div><label class="block text-gray-300">Username/Email</label><input type="text" id="admin-username" value="${currentUser.email}" class="w-full bg-gray-700 border-gray-600 rounded p-2 mt-1" /></div>
+                                    <div><label class="block text-gray-300">Password</label><input type="password" id="admin-password" value="${currentUser.password}" class="w-full bg-gray-700 border-gray-600 rounded p-2 mt-1" /></div>
+                                    <button type="submit" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold py-2 px-4 rounded-lg">Update Credentials</button>
+                                </form>
+                            </div>
+                            <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6 sm:p-8">
+                                <h3 class="text-xl font-bold text-sky-300 mb-6">Payment Account Details</h3>
+                                <form id="account-form" class="space-y-4">
+                                    <div><label class="block text-gray-300">Account Name</label><input type="text" id="account-name" value="${adminAccount.name}" class="w-full bg-gray-700 border-gray-600 rounded p-2 mt-1" /></div>
+                                    <div><label class="block text-gray-300">Account Number</label><input type="text" id="account-number" value="${adminAccount.accountNumber}" class="w-full bg-gray-700 border-gray-600 rounded p-2 mt-1" /></div>
+                                    <button type="submit" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold py-2 px-4 rounded-lg">Update Account</button>
+                                </form>
+                            </div>
+                        </div>`;
+                    break;
             }
 
             dashboardEl.innerHTML = `
-                <div class="min-h-screen bg-gray-900 text-white p-4 sm:p-6 lg:p-8">
-                    <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-                        <h1 class="text-3xl font-bold text-glow">Admin Portal</h1>
-                        <div class="flex items-center flex-wrap gap-2 md:gap-4 self-end md:self-center">
-                            <button id="theme-switcher-admin" class="theme-switcher-btn text-gray-300 hover:text-white transition-colors"></button>
-                            <button id="show-notification-modal-btn" class="bg-sky-600/50 hover:bg-sky-500/50 border border-sky-600 hover:border-sky-500 text-white font-bold py-2 px-3 sm:px-4 rounded-lg transition-colors flex items-center gap-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg> <span class="hidden sm:inline">Send Notification</span>
-                            </button>
-                            <button id="admin-logout-btn" class="bg-gray-700/50 hover:bg-red-500/50 border border-gray-600 hover:border-red-500 text-white font-bold py-2 px-3 sm:px-4 rounded-lg transition-colors flex items-center gap-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg> <span class="hidden sm:inline">Logout</span>
-                            </button>
+                <div class="flex min-h-screen">
+                    <!-- Sidebar -->
+                    <aside id="admin-sidebar" class="w-64 bg-gray-900/70 text-white flex-col p-4 border-r border-gray-700 fixed h-full z-40 transform -translate-x-full transition-transform md:relative md:translate-x-0 md:flex">
+                        <div class="text-2xl font-bold text-glow mb-8 text-center">Admin Portal</div>
+                        <nav class="flex flex-col space-y-2">${navItems.map(item => `
+                            <button data-view="${item.id}" class="admin-nav-btn flex items-center gap-3 px-4 py-2 rounded-lg transition-colors ${view === item.id ? 'bg-sky-500/20 text-sky-300' : 'hover:bg-gray-700/50 text-gray-400 hover:text-white'}">
+                                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">${item.icon}</svg>
+                                <span>${item.label}</span>
+                                ${item.badge > 0 ? `<span class="ml-auto bg-yellow-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">${item.badge}</span>` : ''}
+                            </button>`).join('')}
+                        </nav>
+                        <div class="mt-auto">
+                           <div class="flex items-center gap-3 p-2 border-t border-gray-700 pt-4">
+                                <div class="relative">${generateAvatarHTML(currentUser, 'w-10 h-10', 'text-xl')}</div>
+                                <div class="flex-1"><div class="font-semibold">${currentUser.name}</div><div class="text-xs text-gray-400">Online</div></div>
+                                <button class="theme-switcher-btn text-gray-400 hover:text-white transition-colors"></button>
+                                <button id="admin-logout-btn" title="Logout" class="text-gray-400 hover:text-red-400 transition-colors"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg></button>
+                           </div>
                         </div>
-                    </header>
-                    <div class="border-b border-gray-700 mb-6 w-full overflow-x-auto">
-                        <div class="flex space-x-2 sm:space-x-4 pb-2">
-                            <button data-view="transactions" title="Pending Transactions" class="admin-nav-btn py-2 px-3 font-medium transition-colors flex items-center gap-2 whitespace-nowrap ${view === 'transactions' ? activeClass : inactiveClass}">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> <span class="hidden sm:inline">Pending</span>
-                                ${pendingTransactions.length > 0 ? `<span class="bg-sky-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">${pendingTransactions.length}</span>` : ''}
-                            </button>
-                             <button data-view="history" title="Transaction History" class="admin-nav-btn py-2 px-3 font-medium transition-colors flex items-center gap-2 whitespace-nowrap ${view === 'history' ? activeClass : inactiveClass}">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg> <span class="hidden sm:inline">History</span>
-                            </button>
-                            <button data-view="customers" title="Customer Management" class="admin-nav-btn py-2 px-3 font-medium transition-colors flex items-center gap-2 whitespace-nowrap ${view === 'customers' ? activeClass : inactiveClass}">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.184-1.268-.5-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.184-1.268.5-1.857m0 0a5.002 5.002 0 019 0m-9 0a5.002 5.002 0 00-9 0" /></svg> <span class="hidden sm:inline">Customers</span>
-                            </button>
-                            <button data-view="complaints" title="Customer Complaints" class="admin-nav-btn py-2 px-3 font-medium transition-colors flex items-center gap-2 whitespace-nowrap ${view === 'complaints' ? activeClass : inactiveClass}">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg> <span class="hidden sm:inline">Complaints</span>
-                                 ${pendingComplaints.length > 0 ? `<span class="bg-yellow-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">${pendingComplaints.length}</span>` : ''}
-                            </button>
-                             <button data-view="notifications" title="Notification History" class="admin-nav-btn py-2 px-3 font-medium transition-colors flex items-center gap-2 whitespace-nowrap ${view === 'notifications' ? activeClass : inactiveClass}">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                                 <span class="hidden sm:inline">Notifications</span>
-                            </button>
-                            <button data-view="packages" title="Package Management" class="admin-nav-btn py-2 px-3 font-medium transition-colors flex items-center gap-2 whitespace-nowrap ${view === 'packages' ? activeClass : inactiveClass}">
-                               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.293 2.293a1 1 0 010 1.414L10 12l5.707 5.293a1 1 0 010 1.414L13 21m-2-2l-2.293-2.293a1 1 0 010-1.414L13 12 7.293 6.707a1 1 0 010-1.414L10 3h2z" /></svg> <span class="hidden sm:inline">Packages</span>
-                            </button>
-                             <button data-view="settings" title="Settings" class="admin-nav-btn py-2 px-3 font-medium transition-colors flex items-center gap-2 whitespace-nowrap ${view === 'settings' ? activeClass : inactiveClass}">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                                 <span class="hidden sm:inline">Settings</span>
-                            </button>
+                    </aside>
+                    <!-- Main Content -->
+                    <main class="flex-1 overflow-y-auto flex flex-col">
+                        <div class="flex-grow">
+                            <!-- Mobile header -->
+                            <header class="md:hidden sticky top-0 bg-gray-900/70 backdrop-blur-sm z-20 flex justify-between items-center p-4 border-b border-gray-700">
+                               <h1 class="text-xl font-bold text-glow">Admin</h1>
+                               <button id="hamburger-btn" class="p-2">
+                                   <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                               </button>
+                            </header>
+                            <div class="p-4 md:p-8 animate-fade-in">${mainContentHTML}</div>
                         </div>
-                    </div>
-                    <main id="admin-main-content">${mainContentHTML}</main>
+                        <footer class="py-4 px-8 text-center text-xs text-gray-500 border-t border-gray-700">
+                           Made & Designed by <span class="text-glow font-semibold text-sky-400">Hussain</span>
+                        </footer>
+                    </main>
                 </div>`;
+            
+            // Post-render logic for dynamic content
+            if (view === 'customers') renderAdminCustomerList();
+            if (view === 'transactions') renderAdminTransactionList();
+            if (view === 'complaints') renderAdminComplaintsList();
+            if (view === 'broadcast') renderNotificationHistory();
+            if (view === 'packages') renderAdminPackageList();
         }
 
-        function renderNotificationModal() {
-            const container = document.getElementById('notification-modal-container');
-            const customerUsers = users.filter(u => u.role === Role.CUSTOMER);
-            container.innerHTML = `
-                 <div class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                    <div class="bg-gray-800 border border-sky-500 rounded-2xl p-8 max-w-lg w-full shadow-2xl shadow-sky-500/20">
-                        <h2 class="text-2xl font-bold text-sky-300 mb-4">Send Notification</h2>
-                        <form id="notification-form">
-                            <div class="mb-4">
-                                <label for="recipient" class="block text-gray-300 font-medium mb-2">Recipient</label>
-                                <select id="recipient" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white">
-                                    <option value="all">Broadcast to Everyone</option>
-                                    ${customerUsers.map(u => `<option value="${u.id}">${u.name} (${u.email})</option>`).join('')}
-                                </select>
-                            </div>
-                            <div class="mb-6">
-                                <label for="notification-message" class="block text-gray-300 font-medium mb-2">Message</label>
-                                <textarea id="notification-message" rows="4" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white" required></textarea>
-                            </div>
-                            <div class="flex flex-col sm:flex-row gap-4">
-                                <button type="button" id="cancel-notification" class="w-full bg-gray-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-500">Cancel</button>
-                                <button type="submit" class="w-full bg-sky-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-500">Send</button>
-                            </div>
-                        </form>
+        // --- ADMIN DYNAMIC CONTENT RENDERERS ---
+        function renderAdminCustomerList(searchTerm = '') {
+            const listContainer = document.getElementById('customer-list-container');
+            if(!listContainer) return;
+            const filteredUsers = users.filter(u => u.role === Role.CUSTOMER && 
+                (u.name.toLowerCase().includes(searchTerm) || u.email.toLowerCase().includes(searchTerm) || (u.consumerId || '').toLowerCase().includes(searchTerm)));
+            
+            const mobileHTML = `<div class="block md:hidden space-y-4">${filteredUsers.map(u => `
+                <div class="bg-gray-800 rounded-lg p-4 border border-gray-700">
+                    <div class="flex items-center gap-4 mb-4">
+                        ${generateAvatarHTML(u, 'w-12 h-12', 'text-2xl')}
+                        <div><p class="font-bold text-white">${u.name}</p><p class="text-sm text-gray-400">${u.email}</p></div>
                     </div>
-                </div>`;
-            const close = () => { playSound('click'); container.innerHTML = ''; };
-            document.getElementById('cancel-notification').addEventListener('click', close);
-            document.getElementById('notification-form').addEventListener('submit', (e) => {
-                e.preventDefault();
-                const recipient = document.getElementById('recipient').value;
-                const message = document.getElementById('notification-message').value;
-                if(message.trim()) {
-                    handleSendNotification(recipient, message);
-                    close();
-                }
-            });
-        }
+                    <div class="pt-4 border-t border-gray-600 text-sm space-y-2">
+                        <p><strong class="text-gray-400">Consumer ID:</strong> <span class="font-mono">${u.consumerId || 'N/A'}</span></p>
+                        <p><strong class="text-gray-400">Joined:</strong> <span>${new Date(u.createdAt).toLocaleDateString()}</span></p>
+                    </div>
+                    <div class="mt-4 flex gap-4"><button data-user-id="${u.id}" class="view-customer-btn text-sky-400 hover:text-sky-300 font-medium">View Details</button><button data-user-id="${u.id}" class="delete-customer-btn text-red-400 hover:text-red-300 font-medium">Delete</button></div>
+                </div>`).join('')}</div>`;
 
-        function renderPackageEditModal(aPackage) {
-            const container = document.getElementById('package-edit-modal-container');
-            container.innerHTML = `
-                <div class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                    <div class="bg-gray-800 border border-sky-500 rounded-2xl p-8 max-w-lg w-full shadow-2xl shadow-sky-500/20">
-                        <h2 class="text-2xl font-bold text-sky-300 mb-4">Edit Package: ${aPackage.name}</h2>
-                        <form id="package-edit-form">
-                            <div class="mb-4"><label class="block text-gray-300 font-medium mb-2">Package Name</label><input id="pkg-name" type="text" value="${aPackage.name}" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white" /></div>
-                            <div class="mb-4"><label class="block text-gray-300 font-medium mb-2">Speed / Description</label><input id="pkg-speed" type="text" value="${aPackage.speed}" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white" /></div>
-                            <div class="mb-6"><label class="block text-gray-300 font-medium mb-2">Price ($)</label><input id="pkg-price" type="number" value="${aPackage.price}" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white" /></div>
-                            <div class="flex flex-col sm:flex-row gap-4">
-                                <button type="button" id="cancel-pkg-edit" class="w-full bg-gray-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-500">Cancel</button>
-                                <button type="submit" class="w-full bg-sky-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-500">Save Changes</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>`;
-            const close = () => { playSound('click'); container.innerHTML = ''; };
-            document.getElementById('cancel-pkg-edit').addEventListener('click', close);
-            document.getElementById('package-edit-form').addEventListener('submit', (e) => {
-                e.preventDefault();
-                const name = document.getElementById('pkg-name').value;
-                const speed = document.getElementById('pkg-speed').value;
-                const price = Number(document.getElementById('pkg-price').value);
-                handleUpdatePackage(aPackage.id, { name, speed, price });
-                close();
-            });
+            const desktopHTML = `<div class="overflow-x-auto hidden md:block"><table class="w-full text-left">
+                <thead class="bg-gray-900/70"><tr><th class="p-4">Name</th><th class="p-4">Consumer ID</th><th class="p-4">Email</th><th class="p-4">Joined</th><th class="p-4">Actions</th></tr></thead>
+                <tbody class="divide-y divide-gray-700">${filteredUsers.map(u => `
+                    <tr class="hover:bg-gray-700/50 transition-colors">
+                        <td class="p-4 flex items-center gap-3">${generateAvatarHTML(u, 'w-10 h-10', 'text-xl')} ${u.name}</td>
+                        <td class="p-4 font-mono text-sm">${u.consumerId || 'N/A'}</td>
+                        <td class="p-4 text-gray-300">${u.email}</td>
+                        <td class="p-4 text-gray-400">${new Date(u.createdAt).toLocaleDateString()}</td>
+                        <td class="p-4 flex gap-2"><button data-user-id="${u.id}" class="view-customer-btn text-sky-400 hover:text-sky-300">View</button><button data-user-id="${u.id}" class="delete-customer-btn text-red-400 hover:text-red-300">Delete</button></td>
+                    </tr>`).join('')}</tbody></table></div>`;
+            
+            listContainer.innerHTML = filteredUsers.length > 0 ? mobileHTML + desktopHTML : `<div class="text-center p-8 text-gray-400">No customers found.</div>`;
         }
         
-        function setupDashboardDelegation() {
-            // Customer Dashboard Delegation
-            const customerDashboard = document.getElementById('customer-dashboard');
-            customerDashboard.addEventListener('click', (e) => {
-                const button = e.target.closest('button');
-                if (!button) return;
-
-                if (button.classList.contains('customer-nav-btn')) {
-                    renderCustomerDashboard(button.dataset.view);
-                } else if (button.id === 'customer-logout-btn') {
-                    handleLogout();
-                } else if (button.classList.contains('theme-switcher-btn')) {
-                    toggleTheme();
-                } else if (button.id === 'notification-bell') {
-                    playSound('click');
-                    document.getElementById('notification-dropdown').classList.toggle('hidden-view');
-                } else if (button.classList.contains('buy-btn')) {
-                    const pkgId = button.dataset.packageId;
-                    const pkg = wifiPackages.find(p => p.id === pkgId);
-                    if (pkg) {
-                        playSound('click');
-                        renderPurchaseModal(pkg);
-                    }
-                } else if (button.classList.contains('download-invoice-btn')) {
-                    const txId = button.dataset.txId;
-                    const tx = transactions.find(t => t.id === txId);
-                    const pkg = wifiPackages.find(p => p.id === tx?.packageId);
-                    if(tx && pkg && currentUser) {
-                        playSound('click');
-                        generateInvoice(tx, currentUser, pkg);
-                    }
-                } else if (button.id === 'mark-all-read-btn') {
-                    handleMarkAllRead();
-                }
-            });
-
-            customerDashboard.addEventListener('submit', (e) => {
-                if (e.target.id === 'complaint-form') {
-                    e.preventDefault();
-                    const subject = document.getElementById('subject').value;
-                    const message = document.getElementById('message').value;
-                    if (subject.trim() && message.trim()) {
-                        handleComplaintSubmit(currentUser.id, subject, message);
-                    }
-                }
-            });
+        function renderAdminTransactionList(filter = 'all') {
+            const listContainer = document.getElementById('transaction-list-container');
+            if(!listContainer) return;
+            const filtered = transactions.filter(t => filter === 'all' || t.status === filter).sort((a,b) => new Date(b.purchaseDate) - new Date(a.purchaseDate));
+            const getRowContent = (t) => ({ customer: users.find(u => u.id === t.userId), aPackage: wifiPackages.find(p => p.id === t.packageId) });
             
-            // Admin Dashboard Delegation
-            const adminDashboard = document.getElementById('admin-dashboard');
-            adminDashboard.addEventListener('click', (e) => {
+            const mobileHTML = `<div class="md:hidden space-y-4">${filtered.map(t => { 
+                const { customer, aPackage } = getRowContent(t); 
+                const description = t.type === 'DEBIT_PAYMENT' ? `Debit Payment (Rs ${t.amount.toFixed(2)})` : aPackage?.name || 'N/A';
+                return `
+                <div class="bg-gray-800 rounded-lg p-4 border border-gray-700">
+                    <div class="flex justify-between items-start mb-2"><p class="font-bold text-white">${customer?.name || 'N/A'}</p>${getStatusPillHTML(t.status)}</div>
+                    <p class="text-sm text-gray-300">${description}</p>
+                    <div class="mt-3 pt-3 border-t border-gray-600 text-sm">
+                        <p class="text-gray-400 font-mono break-all">ID: ${t.transactionId}</p>
+                        <p class="text-gray-400">Date: ${new Date(t.purchaseDate).toLocaleDateString()}</p>
+                    </div>
+                    ${t.status === PackageStatus.PENDING ? `<div class="mt-3 flex gap-2"><button data-tx-id="${t.id}" class="approve-btn flex-1 bg-green-500/20 text-green-400 rounded px-3 py-1">Approve</button><button data-tx-id="${t.id}" class="reject-btn flex-1 bg-red-500/20 text-red-400 rounded px-3 py-1">Reject</button></div>` : ''}
+                </div>`; }).join('')}</div>`;
+
+            const desktopHTML = `<div class="hidden md:block overflow-x-auto"><table class="w-full text-left">
+                <thead class="bg-gray-900/70"><tr><th class="p-4">Customer</th><th class="p-4">Description</th><th class="p-4">Transaction ID</th><th class="p-4">Date</th><th class="p-4">Status</th><th class="p-4">Actions</th></tr></thead>
+                <tbody class="divide-y divide-gray-700">${filtered.map(t => { 
+                    const { customer, aPackage } = getRowContent(t); 
+                    const description = t.type === 'DEBIT_PAYMENT' ? `Debit Payment (Rs ${t.amount.toFixed(2)})` : aPackage?.name || 'N/A';
+                    return `<tr class="hover:bg-gray-700/50 transition-colors">
+                    <td class="p-4 font-medium">${customer?.name || 'N/A'}</td><td class="p-4 text-gray-300">${description}</td>
+                    <td class="p-4 text-gray-400 font-mono text-sm">${t.transactionId}</td><td class="p-4 text-gray-300">${new Date(t.purchaseDate).toLocaleDateString()}</td>
+                    <td class="p-4">${getStatusPillHTML(t.status)}</td>
+                    <td class="p-4 flex gap-2">${t.status === PackageStatus.PENDING ? `
+                        <button data-tx-id="${t.id}" class="approve-btn p-2 bg-green-500/20 text-green-400 rounded-full hover:bg-green-500/40" title="Approve"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg></button>
+                        <button data-tx-id="${t.id}" class="reject-btn p-2 bg-red-500/20 text-red-400 rounded-full hover:bg-red-500/40" title="Reject"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>` : ''}
+                    </td></tr>`; }).join('')}</tbody></table></div>`;
+
+            listContainer.innerHTML = filtered.length > 0 ? mobileHTML + desktopHTML : `<div class="text-center p-8 text-gray-400">No transactions match filter.</div>`;
+        }
+
+        function renderAdminComplaintsList() {
+             const listContainer = document.getElementById('complaints-list-container');
+             if(!listContainer) return;
+             const sorted = complaints.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+             const getRowContent = (c) => ({ customer: users.find(u => u.id === c.userId) });
+
+             const mobileHTML = `<div class="md:hidden space-y-4">${sorted.map(c => { const { customer } = getRowContent(c); return `
+                <div class="bg-gray-800 rounded-lg p-4 border border-gray-700">
+                    <div class="flex justify-between items-start mb-2"><p class="font-bold text-white">${c.subject}</p>${getStatusPillHTML(c.status)}</div>
+                    <p class="text-sm text-gray-300 mb-2">${customer?.name || 'Unknown'}</p>
+                    <p class="text-sm text-gray-400 bg-gray-900/50 p-2 rounded">${c.message}</p>
+                    <div class="mt-3 pt-3 border-t border-gray-600 text-sm text-gray-400">${new Date(c.timestamp).toLocaleString()}</div>
+                    ${c.status === ComplaintStatus.PENDING ? `<div class="mt-3"><button data-complaint-id="${c.id}" class="resolve-complaint-btn w-full bg-green-500/20 text-green-400 rounded-lg px-3 py-2 text-sm hover:bg-green-500/40">Resolve</button></div>` : ''}
+                </div>`; }).join('')}</div>`;
+
+             const desktopHTML = `<div class="hidden md:block overflow-x-auto"><table class="w-full text-left">
+                 <thead class="bg-gray-900/70"><tr><th class="p-4">Customer</th><th class="p-4">Subject</th><th class="p-4">Message</th><th class="p-4">Date</th><th class="p-4">Status</th><th class="p-4">Actions</th></tr></thead>
+                 <tbody class="divide-y divide-gray-700">${sorted.map(c => { const { customer } = getRowContent(c); return `<tr class="hover:bg-gray-700/50 transition-colors">
+                    <td class="p-4 font-medium">${customer?.name}</td><td class="p-4 text-gray-300">${c.subject}</td>
+                    <td class="p-4 text-gray-400 max-w-sm truncate">${c.message}</td><td class="p-4 text-gray-300">${new Date(c.timestamp).toLocaleDateString()}</td>
+                    <td class="p-4">${getStatusPillHTML(c.status)}</td>
+                    <td class="p-4">${c.status === ComplaintStatus.PENDING ? `<button data-complaint-id="${c.id}" class="resolve-complaint-btn bg-green-500/20 text-green-400 rounded-lg px-3 py-1 text-sm hover:bg-green-500/40">Resolve</button>` : ''}</td>
+                 </tr>`; }).join('')}</tbody></table></div>`;
+
+            listContainer.innerHTML = sorted.length > 0 ? mobileHTML + desktopHTML : `<div class="text-center p-8 text-gray-400">No complaints found.</div>`;
+        }
+
+        function renderNotificationHistory() {
+            const listEl = document.getElementById('notification-history-list');
+            if(!listEl) return;
+            const sorted = [...notifications].sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+            listEl.innerHTML = sorted.length > 0 ? sorted.map(n => {
+                const recipient = n.userId === 'all' ? 'Everyone' : users.find(u=>u.id===n.userId)?.name || 'Unknown';
+                return `<div class="border-b border-gray-700 pb-2"><p class="text-sm text-gray-300">${n.message}</p><p class="text-xs text-gray-500 mt-1">To: ${recipient} on ${new Date(n.timestamp).toLocaleString()}</p></div>`;
+            }).join('') : `<p class="text-gray-400 text-center">No notifications sent yet.</p>`;
+        }
+
+        function renderAdminPackageList() {
+            const listEl = document.getElementById('package-list');
+            if(!listEl) return;
+            listEl.innerHTML = wifiPackages.map(p => `
+                <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-4 flex flex-col transition-all hover:border-sky-500">
+                    <div class="flex-1"><h3 class="font-bold text-sky-400">${p.name}</h3><p class="text-gray-400 text-sm">${p.speed}</p><p class="font-mono text-white text-xl my-2">Rs ${p.price.toFixed(2)}</p></div>
+                    <button data-package-id="${p.id}" class="edit-package-btn w-full mt-2 bg-gray-600 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded text-sm">Edit</button>
+                </div>`).join('');
+        }
+        
+        // --- MODAL RENDERERS ---
+        function renderModal(content, containerId = 'main-modal-container') {
+             document.getElementById(containerId).innerHTML = `
+                <div class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in">
+                    <div class="modal-content-wrapper w-full">
+                        ${content}
+                    </div>
+                </div>`;
+        }
+
+        function closeModal(containerId = 'main-modal-container') {
+            const container = document.getElementById(containerId);
+            if(container) container.innerHTML = '';
+        }
+        
+        function renderPurchaseModal(aPackage) {
+            renderModal(`
+                <div class="bg-gray-800 border border-sky-500 rounded-2xl p-6 sm:p-8 max-w-lg w-full mx-auto">
+                    <h2 class="text-2xl font-bold text-sky-300 mb-4">Purchase: ${aPackage.name}</h2>
+                    <div class="bg-gray-900 p-4 rounded-lg mb-6 text-center">
+                        <p class="text-gray-300">Send <span class="font-bold text-white text-xl">Rs ${aPackage.price}</span> to:</p>
+                        <p class="mt-2"><span class="text-gray-400">Name:</span> <span class="font-mono text-sky-400">${adminAccount.name}</span></p>
+                        <p><span class="text-gray-400">Account:</span> <span class="font-mono text-sky-400">${adminAccount.accountNumber}</span></p>
+                    </div>
+                    <form id="purchase-form" data-package-id="${aPackage.id}">
+                        <label for="transactionId" class="block text-gray-300 font-medium mb-2">Enter Transaction ID</label>
+                        <input type="text" id="transactionId" class="w-full bg-gray-700 rounded-lg px-4 py-2 text-white" required />
+                        <div class="flex gap-4 mt-6">
+                            <button type="button" class="modal-cancel-btn w-full bg-gray-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-500">Cancel</button>
+                            <button type="submit" class="w-full bg-sky-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-500">Submit</button>
+                        </div>
+                    </form>
+                </div>`);
+        }
+        
+        function renderDebitPaymentModal(debitAmount) {
+            renderModal(`
+                <div class="bg-gray-800 border border-yellow-500 rounded-2xl p-6 sm:p-8 max-w-lg w-full mx-auto">
+                    <h2 class="text-2xl font-bold text-yellow-300 mb-4">Pay Pending Debit</h2>
+                    <div class="bg-gray-900 p-4 rounded-lg mb-6 text-center">
+                        <p class="text-gray-300">Send <span class="font-bold text-white text-xl">Rs ${debitAmount.toFixed(2)}</span> to:</p>
+                        <p class="mt-2"><span class="text-gray-400">Name:</span> <span class="font-mono text-sky-400">${adminAccount.name}</span></p>
+                        <p><span class="text-gray-400">Account:</span> <span class="font-mono text-sky-400">${adminAccount.accountNumber}</span></p>
+                    </div>
+                    <form id="debit-payment-form" data-debit-amount="${debitAmount}">
+                        <label for="debitTransactionId" class="block text-gray-300 font-medium mb-2">Enter Transaction ID</label>
+                        <input type="text" id="debitTransactionId" class="w-full bg-gray-700 rounded-lg px-4 py-2 text-white" required />
+                        <div class="flex gap-4 mt-6">
+                            <button type="button" class="modal-cancel-btn w-full bg-gray-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-500">Cancel</button>
+                            <button type="submit" class="w-full bg-sky-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-500">Submit for Approval</button>
+                        </div>
+                    </form>
+                </div>`);
+        }
+
+        function renderPackageEditModal(aPackage = {}) {
+            const isNew = !aPackage.id;
+            renderModal(`
+                <div class="bg-gray-800 border border-sky-500 rounded-2xl p-6 sm:p-8 max-w-lg w-full mx-auto">
+                    <h2 class="text-2xl font-bold text-sky-300 mb-4">${isNew ? 'Add New' : 'Edit'} Package</h2>
+                    <form id="package-edit-form" data-package-id="${aPackage.id || ''}">
+                        <div class="space-y-4">
+                           <div><label class="block text-gray-300">Name</label><input id="pkg-name" type="text" value="${aPackage.name || ''}" class="w-full bg-gray-700 rounded p-2 mt-1" required></div>
+                           <div><label class="block text-gray-300">Speed / Description</label><input id="pkg-speed" type="text" value="${aPackage.speed || ''}" class="w-full bg-gray-700 rounded p-2 mt-1" required></div>
+                           <div><label class="block text-gray-300">Price (Rs)</label><input id="pkg-price" type="number" value="${aPackage.price || ''}" class="w-full bg-gray-700 rounded p-2 mt-1" required></div>
+                        </div>
+                        <div class="flex gap-4 mt-6">
+                            <button type="button" class="modal-cancel-btn w-full bg-gray-600 font-bold py-2 px-4 rounded-lg hover:bg-gray-500">Cancel</button>
+                            <button type="submit" class="w-full bg-sky-600 font-bold py-2 px-4 rounded-lg hover:bg-sky-500">Save Changes</button>
+                        </div>
+                    </form>
+                </div>`);
+        }
+        
+        function renderCustomerDetailModal(userId) {
+            const user = users.find(u => u.id === userId);
+            if (!user) return;
+            const userTransactions = transactions.filter(t => t.userId === userId).sort((a, b) => new Date(b.purchaseDate) - new Date(a.purchaseDate));
+            renderModal(`
+                <div class="bg-gray-800 border border-sky-500 rounded-2xl p-6 sm:p-8 max-w-4xl w-full mx-auto">
+                    <div class="flex justify-between items-start">
+                        <h2 class="text-2xl font-bold text-sky-300 mb-6">Customer Details</h2>
+                        <button class="modal-cancel-btn text-gray-400 hover:text-white text-4xl leading-none">&times;</button>
+                    </div>
+                    <div class="flex flex-col md:flex-row items-start gap-8">
+                        <div class="text-center">
+                           <div class="relative w-32 mx-auto">
+                                ${generateAvatarHTML(user, 'w-32 h-32', 'text-5xl')}
+                                <span class="absolute bottom-2 right-2 h-4 w-4 bg-green-400 rounded-full border-2 border-gray-800"></span>
+                           </div>
+                           <h3 class="text-xl font-bold mt-2">${user.name}</h3>
+                           <div class="text-sm text-gray-400">${user.email}</div>
+                        </div>
+                        <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-lg">
+                            <div><strong class="text-gray-400">Address:</strong> <span class="text-white">${user.address || 'N/A'}</span></div>
+                            <div><strong class="text-gray-400">CNIC:</strong> <span class="text-white font-mono">${user.cnic || 'N/A'}</span></div>
+                            <div><strong class="text-gray-400">Pending Debit (Rs):</strong> <input type="number" id="debit-info-edit" data-user-id="${user.id}" value="${Number(user.debitInfo || 0).toFixed(2)}" min="0" step="0.01" class="bg-gray-700 border-gray-600 rounded px-2 py-1 text-white font-mono text-sm w-28"></div>
+                            <div><strong class="text-gray-400">All Time Payment (Rs):</strong> <input type="number" id="all-time-payment-edit" data-user-id="${user.id}" value="${Number(user.allTimePayment || 0).toFixed(2)}" min="0" step="0.01" class="bg-gray-700 border-gray-600 rounded px-2 py-1 text-white font-mono text-sm w-28"></div>
+                            <div><strong class="text-gray-400">Consumer ID:</strong> <input type="text" id="consumer-id-edit" data-user-id="${user.id}" value="${user.consumerId || ''}" class="bg-gray-700 border-gray-600 rounded px-2 py-1 text-white font-mono text-sm"></div>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <h4 class="font-bold text-sky-400 mb-2">Transaction History</h4>
+                        <div class="max-h-60 overflow-y-auto border border-gray-700 rounded-lg">
+                           <table class="w-full text-left text-sm">
+                              <thead class="bg-gray-900/70 sticky top-0"><tr><th class="p-2">Date</th><th class="p-2">Description</th><th class="p-2">ID</th><th class="p-2">Status</th></tr></thead>
+                              <tbody class="divide-y divide-gray-700">${userTransactions.length > 0 ? userTransactions.map(t => {
+                                  const pkg = wifiPackages.find(p=>p.id === t.packageId);
+                                  const description = t.type === 'DEBIT_PAYMENT' ? `Debit Payment (Rs ${t.amount.toFixed(2)})` : pkg?.name || 'N/A';
+                                  return `<tr><td class="p-2">${new Date(t.purchaseDate).toLocaleDateString()}</td><td class="p-2">${description}</td><td class="p-2 font-mono">${t.transactionId}</td><td class="p-2">${getStatusPillHTML(t.status)}</td></tr>`
+                              }).join('') : `<tr><td colspan="4" class="p-4 text-center text-gray-400">No transactions</td></tr>`}</tbody>
+                           </table>
+                        </div>
+                    </div>
+                </div>`);
+        }
+
+        function renderDeleteConfirmModal(userId, step = 1) {
+             const user = users.find(u => u.id === userId);
+             if (!user) return;
+             if (step === 1) {
+                renderModal(`
+                    <div class="bg-gray-800 border border-red-500 rounded-2xl p-6 sm:p-8 max-w-md w-full text-center mx-auto">
+                        <h2 class="text-2xl font-bold text-red-400 mb-2">Are you sure?</h2>
+                        <p class="text-gray-300 mb-6">This will permanently delete the customer account for <strong class="text-white">${user.name}</strong>.</p>
+                        <div class="flex gap-4">
+                            <button class="modal-cancel-btn w-full bg-gray-600 font-bold py-2 px-4 rounded-lg hover:bg-gray-500">Cancel</button>
+                            <button id="confirm-delete-step1" data-user-id="${user.id}" class="w-full bg-red-600 font-bold py-2 px-4 rounded-lg hover:bg-red-500">Delete</button>
+                        </div>
+                    </div>`, 'secondary-modal-container');
+             } else {
+                 renderModal(`
+                    <div class="bg-gray-800 border border-red-500 rounded-2xl p-6 sm:p-8 max-w-md w-full text-center mx-auto">
+                        <h2 class="text-2xl font-bold text-red-400 mb-2">Final Confirmation</h2>
+                        <p class="text-gray-300 mb-4">This action cannot be undone. Please type <strong class="text-white font-mono">DELETE</strong> to confirm.</p>
+                        <form id="delete-form-step2" data-user-id="${user.id}">
+                            <input type="text" id="delete-confirm-text" class="w-full bg-gray-700 text-center font-mono rounded-lg p-2" required>
+                            <div class="flex gap-4 mt-4">
+                               <button type="button" class="modal-cancel-btn w-full bg-gray-600 font-bold py-2 px-4 rounded-lg hover:bg-gray-500">Cancel</button>
+                               <button type="submit" class="w-full bg-red-600 font-bold py-2 px-4 rounded-lg hover:bg-red-500">Confirm Deletion</button>
+                           </div>
+                        </form>
+                    </div>`, 'secondary-modal-container');
+             }
+        }
+        
+        // --- EVENT DELEGATION & SETUP ---
+        function setupEventDelegation() {
+            document.body.addEventListener('click', (e) => {
+                if (e.target.id === 'admin-overlay') {
+                    document.getElementById('admin-sidebar')?.classList.add('-translate-x-full');
+                    e.target.classList.add('hidden');
+                    return;
+                }
+
                 const button = e.target.closest('button');
                 if (!button) return;
 
-                if (button.classList.contains('admin-nav-btn')) { renderAdminDashboard(button.dataset.view); }
-                else if (button.id === 'admin-logout-btn') { handleLogout(); }
-                else if (button.classList.contains('theme-switcher-btn')) { toggleTheme(); }
-                else if (button.id === 'show-notification-modal-btn') { playSound('click'); renderNotificationModal(); }
-                else if (button.classList.contains('approve-btn')) { handleApprove(button.dataset.txId); }
-                else if (button.classList.contains('reject-btn')) { handleReject(button.dataset.txId); }
-                else if (button.classList.contains('download-admin-invoice-btn')) {
-                    const txId = button.dataset.txId;
-                    const tx = transactions.find(t => t.id === txId);
-                    const user = users.find(u => u.id === tx?.userId);
-                    const pkg = wifiPackages.find(p => p.id === tx?.packageId);
-                    if (tx && user && pkg) {
-                        playSound('click');
-                        generateInvoice(tx, user, pkg);
+                // Global
+                if (button.classList.contains('theme-switcher-btn')) toggleTheme();
+                if (button.classList.contains('modal-cancel-btn')) {
+                    closeModal('secondary-modal-container');
+                    closeModal('main-modal-container');
+                }
+                if (button.id === 'customer-logout-btn' || button.id === 'admin-logout-btn') handleLogout();
+                
+                // Customer Dashboard
+                if (button.classList.contains('customer-nav-btn')) renderCustomerDashboard(button.dataset.view);
+                if (button.id === 'notification-bell') { playSound('click'); document.getElementById('notification-dropdown').classList.toggle('hidden-view'); }
+                if (button.id === 'mark-all-read-btn') handleMarkAllRead();
+                if (button.classList.contains('buy-btn')) { playSound('click'); renderPurchaseModal(wifiPackages.find(p=>p.id===button.dataset.packageId)); }
+                if (button.classList.contains('download-invoice-btn')) {
+                    const tx = transactions.find(t => t.id === button.dataset.txId);
+                    if(tx) { playSound('click'); generateInvoice(tx, currentUser, wifiPackages.find(p=>p.id===tx.packageId)); }
+                }
+                if (button.id === 'pay-debit-btn') {
+                    playSound('click');
+                    const debitAmount = Number(users.find(u => u.id === currentUser.id)?.debitInfo || 0);
+                    renderDebitPaymentModal(debitAmount);
+                }
+
+                // Admin Dashboard
+                if (button.id === 'hamburger-btn') {
+                    playSound('click');
+                    document.getElementById('admin-sidebar')?.classList.remove('-translate-x-full');
+                    document.getElementById('admin-overlay')?.classList.remove('hidden');
+                }
+                if (button.classList.contains('admin-nav-btn')) {
+                     renderAdminDashboard(button.dataset.view);
+                     if (window.innerWidth < 768) { // md breakpoint
+                        document.getElementById('admin-sidebar')?.classList.add('-translate-x-full');
+                        document.getElementById('admin-overlay')?.classList.add('hidden');
+                     }
+                }
+                if (button.classList.contains('approve-btn')) handleApprove(button.dataset.txId);
+                if (button.classList.contains('reject-btn')) handleReject(button.dataset.txId);
+                if (button.classList.contains('resolve-complaint-btn')) handleResolveComplaint(button.dataset.complaintId);
+                if (button.id === 'add-package-btn') { playSound('click'); renderPackageEditModal(); }
+                if (button.classList.contains('edit-package-btn')) { playSound('click'); renderPackageEditModal(wifiPackages.find(p=>p.id===button.dataset.packageId)); }
+                if (button.classList.contains('view-customer-btn')) { playSound('click'); renderCustomerDetailModal(button.dataset.userId); }
+                if (button.classList.contains('delete-customer-btn')) { playSound('delete'); renderDeleteConfirmModal(button.dataset.userId); }
+                if (button.id === 'confirm-delete-step1') { playSound('delete'); renderDeleteConfirmModal(button.dataset.userId, 2); }
+            });
+
+            document.body.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (e.target.id === 'complaint-form') {
+                    handleComplaintSubmit(currentUser.id, e.target.elements.subject.value, e.target.elements.message.value);
+                } else if (e.target.id === 'purchase-form') {
+                    handlePurchase(e.target.dataset.packageId, e.target.elements.transactionId.value);
+                    closeModal();
+                } else if (e.target.id === 'debit-payment-form') {
+                    handleDebitPayment(e.target.elements.debitTransactionId.value, Number(e.target.dataset.debitAmount));
+                    closeModal();
+                } else if (e.target.id === 'credentials-form') {
+                    handleUpdateCredentials(e.target.elements['admin-username'].value, e.target.elements['admin-password'].value);
+                } else if (e.target.id === 'account-form') {
+                    handleUpdateAdminAccount(e.target.elements['account-name'].value, e.target.elements['account-number'].value);
+                } else if (e.target.id === 'notification-form') {
+                    handleSendNotification(e.target.elements.recipient.value, e.target.elements['notification-message'].value);
+                    e.target.reset();
+                } else if (e.target.id === 'package-edit-form') {
+                    handleUpdatePackage({ id: e.target.dataset.packageId, name: e.target.elements['pkg-name'].value, speed: e.target.elements['pkg-speed'].value, price: Number(e.target.elements['pkg-price'].value) });
+                    closeModal();
+                } else if (e.target.id === 'add-customer-form') {
+                    const fileInput = e.target.elements['profile-pic-upload'];
+                    const form = e.target;
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        handleAddCustomer({
+                           name: form.elements['cust-name'].value, email: form.elements['cust-email'].value,
+                           address: form.elements['cust-address'].value, cnic: form.elements['cust-cnic'].value,
+                           debitInfo: Number(form.elements['cust-debit'].value) || 0,
+                           allTimePayment: Number(form.elements['cust-all-time-payment'].value) || 0,
+                           password: form.elements['cust-password'].value,
+                           consumerId: form.elements['cust-consumer-id'].value, profilePic: event.target.result
+                        });
+                    };
+                    if (fileInput.files.length > 0) {
+                        reader.readAsDataURL(fileInput.files[0]);
+                    } else {
+                        handleAddCustomer({ 
+                           name: form.elements['cust-name'].value, email: form.elements['cust-email'].value, 
+                           address: form.elements['cust-address'].value, cnic: form.elements['cust-cnic'].value, 
+                           debitInfo: Number(form.elements['cust-debit'].value) || 0, 
+                           allTimePayment: Number(form.elements['cust-all-time-payment'].value) || 0,
+                           password: form.elements['cust-password'].value, 
+                           consumerId: form.elements['cust-consumer-id'].value, profilePic: null 
+                        });
+                    }
+                } else if (e.target.id === 'delete-form-step2') {
+                    if (e.target.elements['delete-confirm-text'].value === 'DELETE') {
+                        handleDeleteCustomer(e.target.dataset.userId);
+                        closeModal('secondary-modal-container');
                     } else {
                         playSound('error');
-                        console.error('Could not find transaction, user or package for invoice generation.');
+                        alert('Incorrect confirmation text.');
                     }
-                }
-                else if (button.classList.contains('resolve-complaint-btn')) { handleResolveComplaint(button.dataset.complaintId); }
-                else if (button.id === 'download-complaints-btn') {
-                    playSound('click');
-                    const dataToExport = complaints.map(c => {
-                       const customer = users.find(u => u.id === c.userId);
-                       return { complaintId: c.id, customerName: customer?.name || 'N/A', customerEmail: customer?.email || 'N/A', date: new Date(c.timestamp).toLocaleString(), subject: c.subject, message: c.message, status: c.status };
-                   });
-                   exportToCsv(dataToExport, 'all_complaints_data');
-                }
-                else if (button.classList.contains('edit-package-btn')) {
-                    const pkg = wifiPackages.find(p => p.id === button.dataset.packageId);
-                    if(pkg) renderPackageEditModal(pkg);
-                }
-                else if (button.id === 'download-user-data-btn') {
-                    playSound('click');
-                    const dataToExport = users.filter(u => u.role === Role.CUSTOMER).map(u => {
-                       const userTransactions = transactions.filter(t => t.userId === u.id);
-                       return { userId: u.id, assignId: u.assignId || 'N/A', name: u.name, email: u.email, totalPurchases: userTransactions.length,
-                           totalSpent: userTransactions.filter(t => t.status === 'ACTIVE' || t.status === 'EXPIRED').reduce((sum, t) => sum + (wifiPackages.find(p => p.id === t.packageId)?.price || 0), 0),
-                           joinedDate: new Date(u.createdAt).toLocaleDateString(),
-                       };
-                   });
-                   exportToCsv(dataToExport, 'customer_history_data');
-                }
-                else if (button.classList.contains('edit-assign-id-btn')) {
-                    const userId = button.dataset.userId;
-                    const user = users.find(u => u.id === userId);
-                    if(!user) return;
-
-                    const renderInput = (cellId) => {
-                        const cell = document.getElementById(cellId);
-                        if (!cell) return;
-                        const prefix = cellId.includes('mobile') ? 'Assign ID: ' : '';
-                        cell.innerHTML = `
-                        <div class="flex gap-2 items-center">
-                            ${prefix}<input type="text" id="assign-id-input-${userId}" value="${user.assignId || ''}" class="bg-gray-700 border border-gray-600 rounded px-2 py-1 text-white w-28" autofocus />
-                            <button data-user-id="${userId}" class="save-assign-id-btn text-green-400">Save</button>
-                            <button data-user-id="${userId}" class="cancel-assign-id-btn text-red-400">X</button>
-                        </div>`;
-                        cell.querySelector('input').focus();
-                    };
-                    renderInput(`assign-id-cell-${userId}`);
-                    renderInput(`assign-id-cell-mobile-${userId}`);
-                }
-                else if (button.classList.contains('save-assign-id-btn')) {
-                    const userId = button.dataset.userId;
-                    const newId = document.getElementById(`assign-id-input-${userId}`).value.trim();
-                    if (newId) {
-                      handleAssignId(userId, newId);
-                    }
-                    renderAdminDashboard('customers'); // Re-render to show updated state
-                }
-                else if (button.classList.contains('cancel-assign-id-btn')) {
-                    renderAdminDashboard('customers'); // Re-render to cancel edit
                 }
             });
 
-            adminDashboard.addEventListener('submit', (e) => {
-                e.preventDefault();
-                if (e.target.id === 'credentials-form') {
-                    handleUpdateCredentials(document.getElementById('admin-username').value, document.getElementById('admin-password').value);
+            document.body.addEventListener('input', (e) => {
+                if(e.target.id === 'customer-search') {
+                    renderAdminCustomerList(e.target.value.toLowerCase().trim());
+                } else if (e.target.id === 'transaction-filter') {
+                    renderAdminTransactionList(e.target.value);
+                } else if (e.target.id === 'consumer-id-edit') {
+                    const userId = e.target.dataset.userId;
+                    const user = users.find(u => u.id === userId);
+                    if (user) {
+                        user.consumerId = e.target.value;
+                        saveState();
+                    }
+                } else if (e.target.id === 'debit-info-edit') {
+                    const userId = e.target.dataset.userId;
+                    const user = users.find(u => u.id === userId);
+                    if (user) {
+                        user.debitInfo = Number(e.target.value) || 0;
+                        saveState();
+                    }
+                } else if (e.target.id === 'all-time-payment-edit') {
+                    const userId = e.target.dataset.userId;
+                    const user = users.find(u => u.id === userId);
+                    if (user) {
+                        user.allTimePayment = Number(e.target.value) || 0;
+                        saveState();
+                    }
                 }
-                if (e.target.id === 'account-form') {
-                    handleUpdateAdminAccount(document.getElementById('account-name').value, document.getElementById('account-number').value);
+            });
+
+            document.body.addEventListener('change', (e) => {
+                if(e.target.id === 'profile-pic-upload' && e.target.files[0]) {
+                    const previewContainer = document.getElementById('profile-pic-preview-container');
+                    if (previewContainer) {
+                        previewContainer.innerHTML = `<img id="profile-pic-preview" src="${URL.createObjectURL(e.target.files[0])}" class="w-24 h-24 rounded-full object-cover border-2 border-gray-600">`;
+                    }
                 }
             });
         }
         
         // --- INITIALIZATION ---
         function init() {
-            // Splash screen logic
-            playSound('login');
             setTimeout(() => {
-                const savedTheme = localStorage.getItem('ase_portal_theme') || 'dark';
-                applyTheme(savedTheme);
+                applyTheme(localStorage.getItem('ase_portal_theme') || 'dark');
                 navigateTo('AUTH_SCREEN');
             }, 2500);
 
-            // Set up one-time listeners to initialize audio context on user interaction
             window.addEventListener('click', initAudioContext, { once: true });
-            window.addEventListener('keydown', initAudioContext, { once: true });
-
-            // Auth screen event listeners
             document.getElementById('login-form').addEventListener('submit', handleLogin);
-            document.getElementById('google-login-btn').addEventListener('click', handleGoogleLogin);
-            document.getElementById('nav-to-signup').addEventListener('click', () => navigateTo('SIGNUP_SCREEN'));
-            document.getElementById('nav-to-reset').addEventListener('click', () => navigateTo('RESET_PASSWORD_SCREEN'));
-            
-            // Signup screen event listeners
-            document.getElementById('signup-form').addEventListener('submit', handleSignup);
-            document.getElementById('nav-to-login-from-signup').addEventListener('click', () => navigateTo('AUTH_SCREEN'));
-            
-            // Reset password screen event listeners
-            document.getElementById('reset-password-form').addEventListener('submit', handleResetPassword);
-            document.getElementById('nav-to-login-from-reset').addEventListener('click', () => navigateTo('AUTH_SCREEN'));
-            
-            // Set up robust event listeners for dashboards
-            setupDashboardDelegation();
+            setupEventDelegation();
         }
 
-        // Run app
         window.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
